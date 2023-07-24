@@ -1,0 +1,46 @@
+.todoListItem{
+    padding: 25px;
+    border: 1px solid #867f7f;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.todoListList{
+    padding: 20px 0;
+    flex: 1 1 auto;
+}
+.todoListBtns{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    gap: 15px;
+}
+.taskWrapp{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 250px;
+}
+.task:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.isDone {
+    text-decoration: line-through;
+}
+.isDone .taskText{
+    opacity: 0.6;
+}

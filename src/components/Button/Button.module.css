@@ -1,0 +1,31 @@
+.button{
+    padding: 10px;
+    background-color: #7FC780;
+    border-radius: 5px;
+    transition: all .3s;
+    font-size: 16px;
+    font-weight: 500;
+}
+.button:hover{
+    background-color:#67A169;
+}
+
+.button.activeFilter {
+    color: #fff;
+    background-color: #3E613F;
+}
+.button.round {
+    border: 1px solid #3E613F;
+    border-radius: 50%;
+    background: #fff;
+    padding: 5px;
+    max-width: 32px;
+    max-height: 32px;
+}
+.button.round:hover {
+    border-color: #7FC780;
+    background: #7FC780;
+}
+.button img{
+    width: 20px;
+}

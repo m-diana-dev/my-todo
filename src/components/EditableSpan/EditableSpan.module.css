@@ -1,0 +1,4 @@
+.inputWidth {
+    display: block;
+    max-width: calc(100% - 120px);
+}

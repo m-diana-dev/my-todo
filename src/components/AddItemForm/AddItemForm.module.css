@@ -1,0 +1,9 @@
+.AddItemForm{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+.inputWidth {
+    width: calc(100% - 50px);
+}
