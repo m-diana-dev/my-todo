@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './Button.module.css'
 
 type BtnPropsType = {
@@ -9,9 +9,9 @@ type BtnPropsType = {
     className?: string
     children?: React.ReactNode
 }
-export const Button = (props: BtnPropsType) => {
+export const Button = memo((props: BtnPropsType) => {
     const buttonStyle = s.button + ' ' + (props.round ? s.round : '') + (props.active ? s.activeFilter : '')
     return (
         <button onClick={props.callback} className={buttonStyle}>{props.name}{props.children}</button>
     );
-};
+})

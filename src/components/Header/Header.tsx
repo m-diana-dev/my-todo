@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './Header.module.css'
-export const Header = () => {
+export const Header = memo(() => {
+    console.log('Header rendered')
     return (
         <header className={s.header}>
             <div className="container">
@@ -8,4 +9,4 @@ export const Header = () => {
             </div>
         </header>
     );
-};
+})

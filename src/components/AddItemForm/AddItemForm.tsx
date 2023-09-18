@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {Button} from "../Button/Button";
 import add from "../../image/add.svg";
 import s from './AddItemForm.module.css'
@@ -7,7 +7,8 @@ import s from './AddItemForm.module.css'
 type AddItemFormPropsType = {
     addTitle: (title: string) => void
 }
-export const AddItemForm = (props: AddItemFormPropsType) => {
+export const AddItemForm = memo((props: AddItemFormPropsType) => {
+    console.log('AddItemForm rendered')
     const [inputTitle, setInputTitle] = useState('');
     const [error, setError] = useState('');
     const OnChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,4 +42,4 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             {error && <div className='errorMessage'>{error}</div>}
         </div>
     );
-};
+})

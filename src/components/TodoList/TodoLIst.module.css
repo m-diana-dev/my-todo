@@ -20,27 +20,3 @@
     align-items: center;
     justify-content: space-between;
 }
-.task{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    gap: 15px;
-}
-.taskWrapp{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    max-width: 250px;
-}
-.task:not(:last-child){
-    margin-bottom: 10px;
-}
-
-.isDone {
-    text-decoration: line-through;
-}
-.isDone .taskText{
-    opacity: 0.6;
-}
