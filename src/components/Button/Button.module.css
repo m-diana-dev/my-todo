@@ -16,7 +16,7 @@
 }
 .button.round {
     border: 1px solid #3E613F;
-    border-radius: 50%;
+    border-radius:35%;
     background: #fff;
     padding: 5px;
     max-width: 32px;

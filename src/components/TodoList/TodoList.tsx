@@ -1,11 +1,10 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import '../../App.css';
-import {FilterType, TasksType, TaskType} from "../../App";
+import {FilterType, TaskType} from "../../App";
 import {Button} from "../Button/Button";
 import '../../App.css';
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
-import add from '../../image/add.svg'
 import del from '../../image/delete.svg'
 import s from './TodoLIst.module.css'
 
@@ -14,12 +13,11 @@ type todoListPropsType = {
     title: string
     tasks: TaskType[]
     filter: FilterType
-
     DeleteTask: (idTodoList: string, idTask: string) => void
     DeleteTodoList: (idTodoList: string) => void
     ChangeFilter: (idTodoList: string, filter: FilterType) => void
     addTask: (idTodoList: string, title: string) => void
-    ChangeTask: (idTodoList: string, idTask: string, isDone: boolean) => void
+    ChangeTaskStatus: (idTodoList: string, idTask: string, isDone: boolean) => void
     ChangeTaskTitle: (idTodoList: string, idTask: string, title: string) => void
     ChangeTodoListTitle: (idTodoList: string, title: string) => void
 }
@@ -36,7 +34,7 @@ export function TodoList(props: todoListPropsType) {
     }
 
     const OnChangeTaskHandler = (idTask: string, isDone: boolean) => {
-        props.ChangeTask(props.id, idTask, isDone);
+        props.ChangeTaskStatus(props.id, idTask, isDone);
         console.log(isDone)
     }
 

@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {v1} from "uuid";
 import {TodoList} from "./components/TodoList/TodoList";
 import {AddItemForm} from "./components/AddItemForm/AddItemForm";
 import {Header} from "./components/Header/Header";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./reducers/store";
+import {
+    AddTodoListAC,
+    ChangeTodoListFilterAC,
+    ChangeTodoListTitleAC,
+    DeleteTodoListAC
+} from "./reducers/todolists-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./reducers/tasks-reducer";
 
 export type FilterType = 'all' | 'active' | 'completed';
 
@@ -22,59 +30,39 @@ export type TaskType = {
 }
 
 function App() {
-    const tidoListId1 = v1();
-    const tidoListId2 = v1();
-    const [todoLists, setTodoLists] = useState<TodoListsType[]>(
-        [
-            {id: tidoListId1, title: 'What to learn', filter: 'all'},
-            {id: tidoListId2, title: 'What to buy', filter: 'all'},
-        ]
-    );
-    const [tasks, setTasks] = useState<TasksType>({
-            [tidoListId1]: [
-                {id: v1(), title: "HTML&CSS", isDone: true},
-                {id: v1(), title: "JS", isDone: true},
-                {id: v1(), title: "ReactJS", isDone: false},
-                {id: v1(), title: "ReactJS2", isDone: false},
-            ],
-            [tidoListId2]: [
-                {id: v1(), title: "Milk", isDone: true},
-                {id: v1(), title: "Water", isDone: true},
-            ]
-        }
-    );
+    const tasks = useSelector<AppStateType, TasksType>(state => state.tasks)
+    const todoLists = useSelector<AppStateType, TodoListsType[]>(state => state.todolists)
+
+    const dispatch = useDispatch()
 
     const DeleteTodoList = (idTodoList: string) => {
-        setTodoLists(todoLists.filter(el => el.id !== idTodoList));
-        delete tasks[idTodoList];
+        dispatch(DeleteTodoListAC(idTodoList))
     }
     const DeleteTask = (idTodoList: string, idTask: string) => {
-        setTasks({...tasks, [idTodoList]: tasks[idTodoList].filter(el => el.id !== idTask)})
+        dispatch(removeTaskAC(idTask, idTodoList))
     }
 
     const ChangeFilter = (idTodoList: string, filter: FilterType) => {
-        setTodoLists(todoLists.map(el => el.id === idTodoList ? {...el, filter} : el))
+        dispatch(ChangeTodoListFilterAC(idTodoList, filter))
     }
 
     const ChangeTaskTitle = (idTodoList: string, idTask: string, title: string) => {
-        setTasks({...tasks, [idTodoList]: tasks[idTodoList].map(el => el.id === idTask ? {...el, title} : el)})
+        dispatch(changeTaskTitleAC(idTask, title, idTodoList))
     }
 
     const ChangeTodoListTitle = (idTodoList: string, title: string) => {
-        setTodoLists(todoLists.map(el => el.id === idTodoList ? {...el, title} : el))
+        dispatch(ChangeTodoListTitleAC(idTodoList, title))
     }
     const addTask = (idTodoList: string, title: string) => {
-        setTasks({...tasks, [idTodoList]: [{id: v1(), title, isDone: false}, ...tasks[idTodoList]]})
+        dispatch(addTaskAC(title, idTodoList))
     }
 
-    const ChangeTask = (idTodoList: string, idTask: string, isDone: boolean) => {
-        setTasks({...tasks, [idTodoList]: tasks[idTodoList].map(el => el.id === idTask ? {...el, isDone} : el)})
+    const ChangeTaskStatus = (idTodoList: string, idTask: string, isDone: boolean) => {
+        dispatch(changeTaskStatusAC(idTask, isDone, idTodoList))
     }
 
     const addTodoList = (title: string) => {
-        const newId = v1();
-        setTodoLists([...todoLists, {id: newId, title, filter: 'all'}])
-        setTasks({...tasks, [newId]: []})
+        dispatch(AddTodoListAC(title))
     }
 
 
@@ -94,7 +82,7 @@ function App() {
                       DeleteTask={DeleteTask}
                       ChangeFilter={ChangeFilter}
                       addTask={addTask}
-                      ChangeTask={ChangeTask}
+                      ChangeTaskStatus={ChangeTaskStatus}
                       ChangeTaskTitle={ChangeTaskTitle}
                       ChangeTodoListTitle={ChangeTodoListTitle}/>
         )
