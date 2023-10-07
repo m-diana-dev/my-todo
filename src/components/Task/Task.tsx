@@ -5,11 +5,12 @@ import {Button} from "../Button/Button";
 import del from "../../image/delete.svg";
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../reducers/tasks-reducer";
 import {useDispatch} from "react-redux";
+import {TaskStatuses} from "../../api/todolist-api";
 
 type TaskPropsType = {
     id: string
     title: string
-    status: boolean
+    status: TaskStatuses
     idTodoList: string
 }
 export const Task = memo((props: TaskPropsType) => {
@@ -25,15 +26,15 @@ export const Task = memo((props: TaskPropsType) => {
     }, [dispatch])
 
     const ChangeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeTaskStatusAC(props.id, e.currentTarget.checked, props.idTodoList))
+        dispatch(changeTaskStatusAC(props.id, (e.currentTarget.checked ? TaskStatuses.Completed: TaskStatuses.New), props.idTodoList))
     }, [dispatch])
     return (
-        <li key={props.id} className={s.task + ' ' + (props.status ? s.isDone : undefined)}>
+        <li key={props.id} className={s.task + ' ' + (props.status === TaskStatuses.Completed ? s.isDone : undefined)}>
             <div className={s.taskWrapp}>
                 <div className="checkbox">
                     <input className="checkboxInput"
                            type="checkbox"
-                           checked={props.status}
+                           checked={props.status === TaskStatuses.Completed}
                            onChange={ChangeTaskStatus}/>
                     <label className="checkboxLabel"></label>
                 </div>

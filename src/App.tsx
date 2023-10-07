@@ -9,30 +9,20 @@ import {
     AddTodoListAC,
     ChangeTodoListFilterAC,
     ChangeTodoListTitleAC,
-    DeleteTodoListAC
+    DeleteTodoListAC, FilterType, TodolistDomainType
 } from "./reducers/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./reducers/tasks-reducer";
+import {addTaskAC} from "./reducers/tasks-reducer";
+import {TaskType} from "./api/todolist-api";
 
-export type FilterType = 'all' | 'active' | 'completed';
 
-export type TodoListsType = {
-    id: string
-    title: string
-    filter: FilterType
-}
 export type TasksType = {
     [id: string]: TaskType[]
-}
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
 }
 
 function App() {
     console.log('App rendered')
     const tasks = useSelector<AppStateType, TasksType>(state => state.tasks)
-    const todoLists = useSelector<AppStateType, TodoListsType[]>(state => state.todolists)
+    const todoLists = useSelector<AppStateType, TodolistDomainType[]>(state => state.todolists)
 
     const dispatch = useDispatch()
 

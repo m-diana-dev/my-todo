@@ -1,14 +1,13 @@
-import React, {ChangeEvent, memo, useCallback} from 'react';
+import React, {memo, useCallback} from 'react';
 import '../../App.css';
-import {FilterType, TaskType} from "../../App";
 import {Button} from "../Button/Button";
-import '../../App.css';
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import del from '../../image/delete.svg'
 import s from './TodoLIst.module.css'
 import {Task} from "../Task/Task";
-import {addTaskAC} from "../../reducers/tasks-reducer";
+import {TaskStatuses, TaskType} from "../../api/todolist-api";
+import {FilterType} from "../../reducers/todolists-reducer";
 
 type todoListPropsType = {
     id: string
@@ -39,8 +38,8 @@ export const TodoList = memo((props: todoListPropsType) => {
     }, [props.DeleteTodoList, props.id])
 
     const filteredTasks = useCallback(() => {
-        if (props.filter === 'active') return props.tasks.filter(el => !el.isDone)
-        if (props.filter === 'completed') return props.tasks.filter(el => el.isDone)
+        if (props.filter === 'active') return props.tasks.filter(el => el.status === TaskStatuses.New)
+        if (props.filter === 'completed') return props.tasks.filter(el => el.status === TaskStatuses.Completed)
         return props.tasks
     }, [props.tasks, props.filter])
 
@@ -59,7 +58,7 @@ export const TodoList = memo((props: todoListPropsType) => {
                         <Task key={el.id}
                               id={el.id}
                               title={el.title}
-                              status={el.isDone}
+                              status={el.status}
                               idTodoList={props.id}/>
                     )
                 })}
