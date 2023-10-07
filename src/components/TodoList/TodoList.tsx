@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import '../../App.css';
 import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
@@ -8,6 +8,8 @@ import s from './TodoLIst.module.css'
 import {Task} from "../Task/Task";
 import {TaskStatuses, TaskType} from "../../api/todolist-api";
 import {FilterType} from "../../reducers/todolists-reducer";
+import {useAppDispatch} from "../../reducers/store";
+import {SetTasksTC} from "../../reducers/tasks-reducer";
 
 type todoListPropsType = {
     id: string
@@ -22,6 +24,12 @@ type todoListPropsType = {
 
 export const TodoList = memo((props: todoListPropsType) => {
     console.log('TodoList rendered')
+
+    const dispatch = useAppDispatch()
+
+    // useEffect(()=>{
+    //     dispatch(SetTasksTC(props.id))
+    // }, [])
     const OnTodoListDelHandler = useCallback(() => {
         props.DeleteTodoList(props.id);
     }, [props.DeleteTodoList, props.id])

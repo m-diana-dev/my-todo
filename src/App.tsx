@@ -1,15 +1,15 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from "./components/TodoList/TodoList";
 import {AddItemForm} from "./components/AddItemForm/AddItemForm";
 import {Header} from "./components/Header/Header";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "./reducers/store";
+import {AppStateType, useAppDispatch} from "./reducers/store";
 import {
     AddTodoListAC,
     ChangeTodoListFilterAC,
-    ChangeTodoListTitleAC,
-    DeleteTodoListAC, FilterType, TodolistDomainType
+    ChangeTodoListTitleAC, CreateTodolistTC,
+    DeleteTodoListAC, DeleteTodolistTC, FilterType, SetTodolistsTC, TodolistDomainType, UpdateTodolistTC
 } from "./reducers/todolists-reducer";
 import {addTaskAC} from "./reducers/tasks-reducer";
 import {TaskType} from "./api/todolist-api";
@@ -21,13 +21,18 @@ export type TasksType = {
 
 function App() {
     console.log('App rendered')
+
     const tasks = useSelector<AppStateType, TasksType>(state => state.tasks)
     const todoLists = useSelector<AppStateType, TodolistDomainType[]>(state => state.todolists)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+
+    useEffect(()=>{
+        dispatch(SetTodolistsTC())
+    },[])
 
     const DeleteTodoList = useCallback((idTodoList: string) => {
-        dispatch(DeleteTodoListAC(idTodoList))
+        dispatch(DeleteTodolistTC(idTodoList))
     },[dispatch])
 
     const ChangeFilter = useCallback((idTodoList: string, filter: FilterType) => {
@@ -35,11 +40,11 @@ function App() {
     },[dispatch])
 
     const ChangeTodoListTitle = useCallback((idTodoList: string, title: string) => {
-        dispatch(ChangeTodoListTitleAC(idTodoList, title))
+        dispatch(UpdateTodolistTC(idTodoList, title))
     },[dispatch])
 
     const addTodoList = useCallback((title: string) => {
-        dispatch(AddTodoListAC(title))
+        dispatch(CreateTodolistTC(title))
     }, [dispatch])
 
 
