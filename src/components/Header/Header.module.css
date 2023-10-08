@@ -9,3 +9,15 @@
 .header h1 span{
     margin-right: 10px;
 }
+
+@media (max-width: 765px) {
+    .header{
+        padding: 15px 0;
+    }
+    .header h1{
+        font-size: 26px;
+    }
+    .header h1 span{
+        margin-right: 7px;
+    }
+}

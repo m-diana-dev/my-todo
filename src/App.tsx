@@ -73,7 +73,7 @@ function App() {
             <main className="main">
                 <div className="container">
                     <div className="mainTop">
-                        <h2>Add a new task block!</h2>
+                        <h2>Add a new tasks block!</h2>
                         <AddItemForm addTitle={addTodoList}/>
                     </div>
                     <div className="mainItems">

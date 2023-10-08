@@ -29,3 +29,16 @@
 .button img{
     width: 20px;
 }
+@media (max-width: 765px) {
+    .button{
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+    .button.round {
+        border-radius:33%;
+        padding: 4px;
+        max-width: 30px;
+        max-height: 30px;
+    }
+}

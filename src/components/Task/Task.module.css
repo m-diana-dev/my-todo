@@ -10,7 +10,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 250px;
+    width: calc(100% - 47px);
+}
+.taskText{
+    width: calc(100% - 25px);
 }
 .task:not(:last-child){
     margin-bottom: 10px;
@@ -21,4 +24,10 @@
 }
 .isDone .taskText{
     opacity: 0.6;
+}
+
+@media (max-width: 991px) {
+    .task{
+        font-size: 16px;
+    }
 }

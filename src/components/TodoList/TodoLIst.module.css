@@ -4,6 +4,9 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    width: calc(33.33333% - 30px);
+    margin-left: 30px;
+    margin-bottom: 30px;
 }
 .todoListList{
     padding: 20px 0;
@@ -19,4 +22,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-transform: uppercase;
+}
+.title input{
+    width: calc(100% - 50px);
+}
+
+@media (max-width: 1200px) {
+    .todoListItem{
+        width: calc(33.33333% - 20px);
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 991px) {
+    .todoListItem{
+        padding: 15px;
+        width: calc(50% - 20px);
+    }
+}
+@media (max-width: 765px) {
+    .todoListItem{
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }

@@ -98,7 +98,7 @@ h6 {
 
 .input {
   display: block;
-  padding: 0 20px;
+  padding: 0 10px;
   border-radius: 5px;
   border: 1px solid #867f7f;
   height: 32px;
@@ -131,7 +131,7 @@ h6 {
 .mainItems{
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+    margin-left: -30px;
 }
 
 h2{
@@ -190,5 +190,33 @@ h2{
    border-radius: 2px;
    transition: all .3s;
  }
+
+@media (max-width: 1200px) {
+    .mainItems{
+        margin-left: -20px;
+    }
+}
+
+@media (max-width: 991px) {
+    h2{
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    .mainTop{
+        margin-bottom: 30px;
+    }
+    .input {
+        font-size: 16px;
+    }
+}
+@media (max-width: 765px) {
+    .container {
+        padding: 0 15px;
+    }
+    .input {
+        height: 30px;
+    }
+}
 
 
