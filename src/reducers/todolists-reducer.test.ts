@@ -6,6 +6,7 @@ import {
     DeleteTodoListAC, FilterType, TodolistDomainType,
     todoListsReducer
 } from "./todolists-reducer";
+import {TodolistType} from "../api/todolist-api";
 
 
 let todolistId1: string;
@@ -20,34 +21,32 @@ beforeEach(() => {
         {id: todolistId2, title: "What to buy", filter: "all", addedDate: '', order: 0}
     ]
 })
-// test('correct todolist should be removed', () => {
-//     //выполнения тестируемого кода
-//     // const endState = todoListsReducer(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
-//     const endState = todoListsReducer(startState, DeleteTodoListAC(todolistId1))
-//
-//     //проверка результата на соответствие желаемому результату
-//     expect(endState.length).toBe(1);
-//     expect(endState[0].id).toBe(todolistId2);
-// });
-//
-// test('correct todolist should be added', () => {
-//     let newTodolistTitle = "New Todolist";
-//
-//     const endState =
-//         todoListsReducer(
-//             startState,
-//             AddTodoListAC(newTodolistTitle))
-//
-//
-//     expect(endState.length).toBe(3);
-//     expect(endState[2].title).toBe(newTodolistTitle);
-// });
+test('correct todolist should be removed', () => {
+    //выполнения тестируемого кода
+    // const endState = todoListsReducer(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
+    const endState = todoListsReducer(startState, DeleteTodoListAC(todolistId1))
+
+    //проверка результата на соответствие желаемому результату
+    expect(endState.length).toBe(1);
+    expect(endState[0].id).toBe(todolistId2);
+});
+
+test('correct todolist should be added', () => {
+    const newTodolist: TodolistType = {
+        id: 'random-id',
+        title: 'New Todolist',
+        addedDate: '',
+        order: 0,
+    }
+
+    const endState = todoListsReducer(startState, AddTodoListAC(newTodolist))
+
+    expect(endState.length).toBe(3);
+    expect(endState[0].title).toBe(newTodolist.title);
+});
 
 test('correct todolist should change its name', () => {
     let newTodolistTitle = "New Todolist";
-
-    // const action: ChangeTodoListTitleAT = {type: "CHANGE-TODOLIST-TITLE",
-    //     idTodoList: todolistId2, title: newTodolistTitle}
 
     const action: ChangeTodoListTitleAT = ChangeTodoListTitleAC(todolistId2, newTodolistTitle)
     const endState = todoListsReducer(startState, action);
