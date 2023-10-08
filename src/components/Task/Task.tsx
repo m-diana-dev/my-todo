@@ -3,7 +3,7 @@ import s from "./Task.module.css";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Button} from "../Button/Button";
 import del from "../../image/delete.svg";
-import {changeTaskStatusAC, changeTaskTitleAC, DeleteTaskTC, UpdateTaskTC} from "../../reducers/tasks-reducer";
+import {DeleteTaskTC, UpdateTaskTC} from "../../reducers/tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {useAppDispatch} from "../../reducers/store";
 
@@ -22,11 +22,13 @@ export const Task = memo((props: TaskPropsType) => {
     }, [dispatch])
 
     const ChangeTaskTitle = useCallback((title: string) => {
-        dispatch(changeTaskTitleAC(props.id, title, props.idTodoList))
+        dispatch(UpdateTaskTC(props.idTodoList, props.id,{title: title}))
     }, [dispatch])
 
     const ChangeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(UpdateTaskTC(props.idTodoList, props.id, (e.currentTarget.checked ? TaskStatuses.Completed: TaskStatuses.New)))
+        dispatch(UpdateTaskTC(props.idTodoList, props.id,
+            {status: (e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New)}
+        ))
     }, [dispatch])
     return (
         <li key={props.id} className={s.task + ' ' + (props.status === TaskStatuses.Completed ? s.isDone : undefined)}>
