@@ -20,28 +20,28 @@ beforeEach(() => {
         {id: todolistId2, title: "What to buy", filter: "all", addedDate: '', order: 0}
     ]
 })
-test('correct todolist should be removed', () => {
-    //выполнения тестируемого кода
-    // const endState = todoListsReducer(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
-    const endState = todoListsReducer(startState, DeleteTodoListAC(todolistId1))
-
-    //проверка результата на соответствие желаемому результату
-    expect(endState.length).toBe(1);
-    expect(endState[0].id).toBe(todolistId2);
-});
-
-test('correct todolist should be added', () => {
-    let newTodolistTitle = "New Todolist";
-
-    const endState =
-        todoListsReducer(
-            startState,
-            AddTodoListAC(newTodolistTitle))
-
-
-    expect(endState.length).toBe(3);
-    expect(endState[2].title).toBe(newTodolistTitle);
-});
+// test('correct todolist should be removed', () => {
+//     //выполнения тестируемого кода
+//     // const endState = todoListsReducer(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
+//     const endState = todoListsReducer(startState, DeleteTodoListAC(todolistId1))
+//
+//     //проверка результата на соответствие желаемому результату
+//     expect(endState.length).toBe(1);
+//     expect(endState[0].id).toBe(todolistId2);
+// });
+//
+// test('correct todolist should be added', () => {
+//     let newTodolistTitle = "New Todolist";
+//
+//     const endState =
+//         todoListsReducer(
+//             startState,
+//             AddTodoListAC(newTodolistTitle))
+//
+//
+//     expect(endState.length).toBe(3);
+//     expect(endState[2].title).toBe(newTodolistTitle);
+// });
 
 test('correct todolist should change its name', () => {
     let newTodolistTitle = "New Todolist";

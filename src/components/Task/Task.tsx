@@ -3,9 +3,9 @@ import s from "./Task.module.css";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Button} from "../Button/Button";
 import del from "../../image/delete.svg";
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../reducers/tasks-reducer";
-import {useDispatch} from "react-redux";
+import {changeTaskStatusAC, changeTaskTitleAC, DeleteTaskTC, UpdateTaskTC} from "../../reducers/tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
+import {useAppDispatch} from "../../reducers/store";
 
 type TaskPropsType = {
     id: string
@@ -15,10 +15,10 @@ type TaskPropsType = {
 }
 export const Task = memo((props: TaskPropsType) => {
     console.log('Task rendered')
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch()
 
     const DeleteTask = useCallback(() => {
-        dispatch(removeTaskAC(props.id, props.idTodoList))
+        dispatch(DeleteTaskTC(props.idTodoList, props.id))
     }, [dispatch])
 
     const ChangeTaskTitle = useCallback((title: string) => {
@@ -26,7 +26,7 @@ export const Task = memo((props: TaskPropsType) => {
     }, [dispatch])
 
     const ChangeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeTaskStatusAC(props.id, (e.currentTarget.checked ? TaskStatuses.Completed: TaskStatuses.New), props.idTodoList))
+        dispatch(UpdateTaskTC(props.idTodoList, props.id, (e.currentTarget.checked ? TaskStatuses.Completed: TaskStatuses.New)))
     }, [dispatch])
     return (
         <li key={props.id} className={s.task + ' ' + (props.status === TaskStatuses.Completed ? s.isDone : undefined)}>

@@ -27,9 +27,10 @@ export const TodoList = memo((props: todoListPropsType) => {
 
     const dispatch = useAppDispatch()
 
-    // useEffect(()=>{
-    //     dispatch(SetTasksTC(props.id))
-    // }, [])
+    useEffect(()=>{
+        dispatch(SetTasksTC(props.id))
+    }, [])
+
     const OnTodoListDelHandler = useCallback(() => {
         props.DeleteTodoList(props.id);
     }, [props.DeleteTodoList, props.id])
@@ -43,7 +44,7 @@ export const TodoList = memo((props: todoListPropsType) => {
 
     const ChangeTodoListTitle = useCallback((title: string) => {
         props.ChangeTodoListTitle(props.id, title)
-    }, [props.DeleteTodoList, props.id])
+    }, [props.ChangeTodoListTitle, props.id])
 
     const filteredTasks = useCallback(() => {
         if (props.filter === 'active') return props.tasks.filter(el => el.status === TaskStatuses.New)

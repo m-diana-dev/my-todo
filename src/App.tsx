@@ -11,7 +11,7 @@ import {
     ChangeTodoListTitleAC, CreateTodolistTC,
     DeleteTodoListAC, DeleteTodolistTC, FilterType, SetTodolistsTC, TodolistDomainType, UpdateTodolistTC
 } from "./reducers/todolists-reducer";
-import {addTaskAC} from "./reducers/tasks-reducer";
+import {addTaskAC, CreateTasksTC} from "./reducers/tasks-reducer";
 import {TaskType} from "./api/todolist-api";
 
 
@@ -49,7 +49,7 @@ function App() {
 
 
     const addTask = useCallback((idTodoList: string, title: string) => {
-        dispatch(addTaskAC(title, idTodoList))
+        dispatch(CreateTasksTC(idTodoList, title))
     },[dispatch])
 
     const todoListComponent = todoLists.map(el => {
