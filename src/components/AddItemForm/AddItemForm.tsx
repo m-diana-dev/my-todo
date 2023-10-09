@@ -8,7 +8,6 @@ type AddItemFormPropsType = {
     addTitle: (title: string) => void
 }
 export const AddItemForm = memo((props: AddItemFormPropsType) => {
-    console.log('AddItemForm rendered')
     const [inputTitle, setInputTitle] = useState('');
     const [error, setError] = useState('');
     const OnChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {

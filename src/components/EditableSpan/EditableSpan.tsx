@@ -6,7 +6,6 @@ type EditableSpanPropsType = {
     onChange:(title: string)=>void
 }
 export const EditableSpan = memo((props: EditableSpanPropsType) => {
-    console.log('EditableSpan rendered')
     const [modeInput, setModeInput] = useState(false);
     const [inputTitle, setInputTitle] = useState(props.title);
     const onDoubleClickHandler = () => {
@@ -19,7 +18,9 @@ export const EditableSpan = memo((props: EditableSpanPropsType) => {
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setInputTitle(e.currentTarget.value)
     }
+
     const inputStyle = 'input' + ' ' + s.inputWidth;
+
     return (
         modeInput
             ? <input className={inputStyle} autoFocus onBlur={onBlurHandler} value={inputTitle} onChange={onChangeHandler}/>

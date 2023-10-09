@@ -23,8 +23,6 @@ type todoListPropsType = {
 }
 
 export const TodoList = memo((props: todoListPropsType) => {
-    console.log('TodoList rendered')
-
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
@@ -34,6 +32,7 @@ export const TodoList = memo((props: todoListPropsType) => {
     const OnTodoListDelHandler = useCallback(() => {
         props.DeleteTodoList(props.id);
     }, [props.DeleteTodoList, props.id])
+
     const OnChangeFilterHandler = useCallback((filterValue: FilterType) => {
         props.ChangeFilter(props.id, filterValue);
     }, [props.id, props.ChangeFilter])
