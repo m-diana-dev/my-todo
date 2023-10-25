@@ -3,10 +3,12 @@ import {tasksReducer} from "./tasks-reducer";
 import {todoListsReducer} from "./todolists-reducer";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
+import {appReducer} from "./app-reducer";
 
 export const RootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todoListsReducer
+    todolists: todoListsReducer,
+    app: appReducer
 })
 
 export const AppStore = createStore(RootReducer, applyMiddleware(thunk))
