@@ -1,6 +1,7 @@
 import {todolistAPI, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
-import {SetAppStatusAC} from "./app-reducer";
+import {SetAppErrorAC, SetAppStatusAC} from "./app-reducer";
+import {addTaskAC} from "./tasks-reducer";
 
 const initialState: TodolistDomainType[] = []
 export const todoListsReducer = (state: TodolistDomainType[] = initialState, action: ActionType): TodolistDomainType[] => {
@@ -70,8 +71,17 @@ export const CreateTodolistTC = (title: string) => (dispatch: Dispatch) => {
     dispatch(SetAppStatusAC('loading'))
     todolistAPI.createTodolist(title)
         .then(res => {
-            dispatch(AddTodoListAC(res.data.data.item))
-            dispatch(SetAppStatusAC('succeeded'))
+            if(res.data.resultCode === 0) {
+                dispatch(AddTodoListAC(res.data.data.item))
+                dispatch(SetAppStatusAC('succeeded'))
+            } else {
+                dispatch(SetAppStatusAC('failed'))
+                if(res.data.messages.length){
+                    dispatch(SetAppErrorAC(res.data.messages[0]))
+                } else {
+                    dispatch(SetAppErrorAC('Some Error'))
+                }
+            }
         })
 }
 export const DeleteTodolistTC = (todolistID: string) => (dispatch: Dispatch) => {
@@ -86,8 +96,17 @@ export const UpdateTodolistTC = (todolistID: string, title: string) => (dispatch
     dispatch(SetAppStatusAC('loading'))
     todolistAPI.updateTodolist(todolistID, title)
         .then(res => {
-            dispatch(ChangeTodoListTitleAC(todolistID, title))
-            dispatch(SetAppStatusAC('succeeded'))
+            if(res.data.resultCode === 0) {
+                dispatch(ChangeTodoListTitleAC(todolistID, title))
+                dispatch(SetAppStatusAC('succeeded'))
+            } else {
+                dispatch(SetAppStatusAC('failed'))
+                if(res.data.messages.length){
+                    dispatch(SetAppErrorAC(res.data.messages[0]))
+                } else {
+                    dispatch(SetAppErrorAC('Some Error'))
+                }
+            }
         })
 }
 
