@@ -3,15 +3,17 @@ import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "../../reducers/store";
 import {
-    ChangeTodoListFilterAC, CreateTodolistTC,
+    ChangeTodoListFilterAC,
+    CreateTodolistTC,
     DeleteTodolistTC,
     FilterType,
     SetTodolistsTC,
-    TodolistDomainType, UpdateTodolistTC
+    TodolistDomainType,
+    UpdateTodolistTC
 } from "../../reducers/todolists-reducer";
 import {CreateTasksTC} from "../../reducers/tasks-reducer";
 import {TodoList} from "../TodoList/TodoList";
-import {TaskDomainType, TaskType} from "../../api/todolist-api";
+import {TaskDomainType} from "../../api/todolist-api";
 
 export type TasksType = {
     [id: string]: TaskDomainType[]
@@ -24,7 +26,7 @@ export const TodoLists = () => {
 
     useEffect(()=>{
         dispatch(SetTodolistsTC())
-    },[])
+    },[dispatch])
 
     const DeleteTodoList = useCallback((idTodoList: string) => {
         dispatch(DeleteTodolistTC(idTodoList))
