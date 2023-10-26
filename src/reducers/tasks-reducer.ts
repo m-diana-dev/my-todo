@@ -117,6 +117,10 @@ export const SetTasksTC = (todolistID: string) => (dispatch: Dispatch) => {
             dispatch(SetTasksAC(todolistID, res.data.items))
             dispatch(SetAppStatusAC('succeeded'))
         })
+        .catch(e=>{
+            dispatch(SetAppErrorAC(e.message))
+            dispatch(SetAppStatusAC('failed'))
+        })
 }
 export const CreateTasksTC = (todolistID: string, title: string) => (dispatch: Dispatch) => {
     dispatch(SetAppStatusAC('loading'))
@@ -134,6 +138,10 @@ export const CreateTasksTC = (todolistID: string, title: string) => (dispatch: D
                 }
             }
         })
+        .catch(e=>{
+            dispatch(SetAppErrorAC(e.message))
+            dispatch(SetAppStatusAC('failed'))
+        })
 }
 export const DeleteTaskTC = (todolistID: string, taskID: string) => (dispatch: Dispatch) => {
     dispatch(SetAppStatusAC('loading'))
@@ -143,6 +151,10 @@ export const DeleteTaskTC = (todolistID: string, taskID: string) => (dispatch: D
             dispatch(removeTaskAC(taskID, todolistID))
             dispatch(SetAppStatusAC('succeeded'))
             dispatch(ChangeTaskEntityStatusAC(todolistID, taskID, 'succeeded'))
+        })
+        .catch(e=>{
+            dispatch(SetAppErrorAC(e.message))
+            dispatch(SetAppStatusAC('failed'))
         })
 }
 export type UpdateDomainTaskModelType = {
@@ -181,6 +193,10 @@ export const UpdateTaskTC = (todolistID: string, taskID: string, domainModel: Up
                         dispatch(SetAppErrorAC('Some Error'))
                     }
                 }
+            })
+            .catch(e=>{
+                dispatch(SetAppErrorAC(e.message))
+                dispatch(SetAppStatusAC('failed'))
             })
 
     }
