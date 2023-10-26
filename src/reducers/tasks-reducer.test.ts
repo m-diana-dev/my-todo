@@ -1,4 +1,4 @@
-import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from './tasks-reducer'
+import {addTaskAC, ChangeTaskEntityStatusAC, removeTaskAC, tasksReducer, updateTaskAC} from './tasks-reducer'
 import {AddTodoListAC, DeleteTodoListAC} from "./todolists-reducer";
 import {TaskPriorities, TaskStatuses, TaskType, TodolistType} from "../api/todolist-api";
 import {TasksType} from "../components/TodoLists/TodoLists";
@@ -300,4 +300,11 @@ test('property with todolistId should be deleted', () => {
 
     expect(keys.length).toBe(1)
     expect(endState['todolistId2']).not.toBeDefined()
+})
+
+test('entity status of task should be changed', () => {
+    const endState = tasksReducer(startState, ChangeTaskEntityStatusAC('todolistId1', '1', 'loading'))
+
+    expect(endState['todolistId1'][0].entityStatus).toBe('loading');
+    expect(startState['todolistId1'][0].entityStatus).toBe('idle');
 })

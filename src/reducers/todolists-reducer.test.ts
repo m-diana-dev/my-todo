@@ -1,12 +1,13 @@
 import {v1} from "uuid";
 import {
     AddTodoListAC, ChangeTodoListFilterAC,
-    ChangeTodoListFilterAT, ChangeTodoListTitleAC,
+    ChangeTodoListFilterAT, ChangeTodoListStatusAC, ChangeTodoListTitleAC,
     ChangeTodoListTitleAT,
     DeleteTodoListAC, FilterType, TodolistDomainType,
     todoListsReducer
 } from "./todolists-reducer";
 import {TodolistType} from "../api/todolist-api";
+import {ChangeTaskEntityStatusAC, tasksReducer} from "./tasks-reducer";
 
 
 let todolistId1: string;
@@ -66,5 +67,12 @@ test('correct filter of todolist should be changed', () => {
     expect(endState[0].filter).toBe("all");
     expect(endState[1].filter).toBe(newFilter);
 });
+
+test('entity status of todolist should be changed', () => {
+    const endState = todoListsReducer(startState, ChangeTodoListStatusAC(todolistId1, 'loading'))
+
+    expect(endState[0].status).toBe('loading');
+    expect(startState[0].status).toBe('idle');
+})
 
 
