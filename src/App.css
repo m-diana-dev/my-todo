@@ -144,8 +144,14 @@ h2{
   position: relative;
 }
 
+.checkbox.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .checkboxInput {
   position: absolute;
+    cursor: pointer;
   width: 100%;
   height: 100%;
   opacity: 0;

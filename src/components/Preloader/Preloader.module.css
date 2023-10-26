@@ -10,6 +10,7 @@
     align-content: center;
     justify-content: flex-start;
     z-index: 100000;
+    pointer-events: none;
 }
 .preloaderLine{
     height: 3px;

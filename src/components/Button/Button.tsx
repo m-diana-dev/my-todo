@@ -8,10 +8,11 @@ type BtnPropsType = {
     active?: boolean
     className?: string
     children?: React.ReactNode
+    disabled?: boolean
 }
 export const Button = memo((props: BtnPropsType) => {
     const buttonStyle = s.button + ' ' + (props.round ? s.round : '') + (props.active ? s.activeFilter : '')
     return (
-        <button onClick={props.callback} className={buttonStyle}>{props.name}{props.children}</button>
+        <button onClick={props.callback} disabled={props.disabled} className={buttonStyle}>{props.name}{props.children}</button>
     );
 })

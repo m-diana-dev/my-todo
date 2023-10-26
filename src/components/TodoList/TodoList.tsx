@@ -6,16 +6,18 @@ import {EditableSpan} from "../EditableSpan/EditableSpan";
 import del from '../../image/delete.svg'
 import s from './TodoLIst.module.css'
 import {Task} from "../Task/Task";
-import {TaskStatuses, TaskType} from "../../api/todolist-api";
+import {TaskDomainType, TaskStatuses, TaskType} from "../../api/todolist-api";
 import {FilterType} from "../../reducers/todolists-reducer";
 import {useAppDispatch} from "../../reducers/store";
 import {SetTasksTC} from "../../reducers/tasks-reducer";
+import {RequestStatusType} from "../../reducers/app-reducer";
 
 type todoListPropsType = {
     id: string
     title: string
-    tasks: TaskType[]
+    tasks: TaskDomainType[]
     filter: FilterType
+    status: RequestStatusType
     DeleteTodoList: (idTodoList: string) => void
     ChangeFilter: (idTodoList: string, filter: FilterType) => void
     ChangeTodoListTitle: (idTodoList: string, title: string) => void
@@ -54,12 +56,12 @@ export const TodoList = memo((props: todoListPropsType) => {
     return (
         <div className={s.todoListItem}>
             <h2 className={s.title}>
-                <EditableSpan title={props.title} onChange={ChangeTodoListTitle}/>
-                <Button callback={OnTodoListDelHandler} round={true}>
+                <EditableSpan title={props.title} onChange={ChangeTodoListTitle} disabled={props.status==='loading'}/>
+                <Button callback={OnTodoListDelHandler} round={true} disabled={props.status==='loading'}>
                     <img src={del} alt="icon"/>
                 </Button>
             </h2>
-            <AddItemForm addTitle={addTask}/>
+            <AddItemForm addTitle={addTask} disabled={props.status==='loading'}/>
             <ul className={s.todoListList}>
                 {filteredTasks().map(el => {
                     return (
@@ -67,6 +69,7 @@ export const TodoList = memo((props: todoListPropsType) => {
                               id={el.id}
                               title={el.title}
                               status={el.status}
+                              entityStatus={el.entityStatus}
                               idTodoList={props.id}/>
                     )
                 })}

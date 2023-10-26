@@ -3,13 +3,16 @@ import s from "./EditableSpan.module.css";
 
 type EditableSpanPropsType = {
     title: string
+    disabled?: boolean
     onChange:(title: string)=>void
 }
 export const EditableSpan = memo((props: EditableSpanPropsType) => {
     const [modeInput, setModeInput] = useState(false);
     const [inputTitle, setInputTitle] = useState(props.title);
     const onDoubleClickHandler = () => {
-        setModeInput(true);
+        if(!props.disabled){
+            setModeInput(true);
+        }
     }
     const onBlurHandler = () => {
         setModeInput(false);

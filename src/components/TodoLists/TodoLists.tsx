@@ -11,10 +11,10 @@ import {
 } from "../../reducers/todolists-reducer";
 import {CreateTasksTC} from "../../reducers/tasks-reducer";
 import {TodoList} from "../TodoList/TodoList";
-import {TaskType} from "../../api/todolist-api";
+import {TaskDomainType, TaskType} from "../../api/todolist-api";
 
 export type TasksType = {
-    [id: string]: TaskType[]
+    [id: string]: TaskDomainType[]
 }
 export const TodoLists = () => {
     const tasks = useSelector<AppStateType, TasksType>(state => state.tasks)
@@ -52,6 +52,7 @@ export const TodoLists = () => {
                       id={el.id}
                       title={el.title}
                       filter={el.filter}
+                      status={el.status}
                       tasks={tasks[el.id]}
                       DeleteTodoList={DeleteTodoList}
                       ChangeFilter={ChangeFilter}
@@ -64,7 +65,7 @@ export const TodoLists = () => {
             <div className="container">
                 <div className="mainTop">
                     <h2>Add a new tasks block!</h2>
-                    <AddItemForm addTitle={addTodoList}/>
+                    <AddItemForm addTitle={addTodoList} disabled={todoLists.length===10}/>
                 </div>
                 <div className="mainItems">
                     {todoListComponent}

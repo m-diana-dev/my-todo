@@ -10,6 +10,11 @@
     background-color:#67A169;
 }
 
+.button:disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .button.activeFilter {
     color: #fff;
     background-color: #3E613F;

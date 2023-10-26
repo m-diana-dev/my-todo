@@ -6,6 +6,7 @@ import s from './AddItemForm.module.css'
 
 type AddItemFormPropsType = {
     addTitle: (title: string) => void
+    disabled?: boolean
 }
 export const AddItemForm = memo((props: AddItemFormPropsType) => {
     const [inputTitle, setInputTitle] = useState('');
@@ -30,8 +31,9 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
     }
 
     const inputStyle = 'input' + ' ' + (error ? 'errorInput' : '') + ' ' + s.inputWidth;
+    const disabledForm = props.disabled? s.disabled: undefined
     return (
-        <div className={s.AddItemForm}>
+        <div className={s.AddItemForm + ' ' + disabledForm}>
             <input className={inputStyle} type="text" onChange={OnChangeInputHandler}
                    onKeyDown={onKeyDownHandler}
                    value={inputTitle}/>

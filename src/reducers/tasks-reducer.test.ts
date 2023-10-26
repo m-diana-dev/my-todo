@@ -16,6 +16,7 @@ beforeEach(() => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             },
             {
@@ -26,6 +27,7 @@ beforeEach(() => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             },
             {
@@ -36,6 +38,7 @@ beforeEach(() => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             }
         ],
@@ -48,6 +51,7 @@ beforeEach(() => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             },
             {
@@ -57,6 +61,7 @@ beforeEach(() => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -67,6 +72,7 @@ beforeEach(() => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             }
@@ -89,6 +95,7 @@ test('correct task should be deleted from correct array', () => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             },
             {
@@ -99,6 +106,7 @@ test('correct task should be deleted from correct array', () => {
                 addedDate: '',
                 startDate: '',
                 order: 0,
+                entityStatus: 'idle',
                 priority: TaskPriorities.Low
             },
             {
@@ -108,6 +116,7 @@ test('correct task should be deleted from correct array', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             }
@@ -120,6 +129,7 @@ test('correct task should be deleted from correct array', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -130,6 +140,7 @@ test('correct task should be deleted from correct array', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             }
@@ -191,6 +202,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -201,6 +213,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -211,6 +224,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             }
@@ -223,6 +237,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -233,6 +248,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             },
@@ -243,6 +259,7 @@ test('new array should be added when new todolist is added', () => {
                 description: '',
                 addedDate: '',
                 startDate: '',
+                entityStatus: 'idle',
                 order: 0,
                 priority: TaskPriorities.Low
             }
