@@ -13,3 +13,14 @@
 .errorInput {
     border-color: #cb4949;
 }
+
+@media (max-width: 991px) {
+    .input {
+        font-size: 16px;
+    }
+}
+@media (max-width: 765px) {
+    .input {
+        height: 30px;
+    }
+}
