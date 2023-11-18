@@ -2,6 +2,7 @@ import React from 'react';
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
 import s from './Login.module.css'
+import {Checkbox} from "../Checkbox/Checkbox";
 
 export const Login = () => {
     return (
@@ -20,6 +21,7 @@ export const Login = () => {
                 <form action="">
                     <Input placeholder={'Email'}/>
                     <Input placeholder={'Password'}/>
+                    <Checkbox onChange={()=>{}} label={'Remember me'}/>
                     <Button callback={() => {
                     }}>Login</Button>
                 </form>

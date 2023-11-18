@@ -47,6 +47,7 @@
 }
 
 .loginPage button{
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -63,5 +64,8 @@
     }
     .loginPage input:not(:last-child){
         margin-bottom: 10px;
+    }
+    .loginPage button{
+        margin-top: 15px;
     }
 }
