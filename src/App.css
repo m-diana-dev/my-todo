@@ -96,28 +96,13 @@ h6 {
   margin: 0 auto;
 }
 
-.input {
-  display: block;
-  padding: 0 10px;
-  border-radius: 5px;
-  border: 1px solid #867f7f;
-  height: 32px;
-  background-color: #fff;
-  font-size: 18px;
-  line-height: 120%;
-}
-
-.errorInput {
-  border-color: #cb4949;
-}
-
 .errorMessage {
-  position: absolute;
-  color: #cb4949;
-  font-weight: 500;
-  font-size: 16px;
-  bottom: -20px;
-  left: 5px;
+    position: absolute;
+    color: #cb4949;
+    font-weight: 500;
+    font-size: 16px;
+    bottom: -20px;
+    left: 5px;
 }
 
 .main{

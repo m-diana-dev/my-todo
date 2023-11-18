@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {Button} from "../Button/Button";
 import add from "../../image/add.svg";
 import s from './AddItemForm.module.css'
+import {Input} from "../Input/Input";
 
 
 type AddItemFormPropsType = {
@@ -30,13 +31,13 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
         }
     }
 
-    const inputStyle = 'input' + ' ' + (error ? 'errorInput' : '') + ' ' + s.inputWidth;
+    const inputStyle = s.inputWidth;
     const disabledForm = props.disabled? s.disabled: undefined
     return (
         <div className={s.AddItemForm + ' ' + disabledForm}>
-            <input className={inputStyle} type="text" onChange={OnChangeInputHandler}
+            <Input style={inputStyle} type="text" onChange={OnChangeInputHandler}
                    onKeyDown={onKeyDownHandler}
-                   value={inputTitle}/>
+                   value={inputTitle} error={!!error}/>
             <Button callback={OnAddTitleHandler} round={true}>
                 <img src={add} alt="icon"/>
             </Button>

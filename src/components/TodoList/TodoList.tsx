@@ -75,12 +75,18 @@ export const TodoList = memo((props: todoListPropsType) => {
                 })}
             </ul>
             <div className={s.todoListBtns}>
-                <Button active={props.filter === 'all'} name={'all'}
-                        callback={useCallback(() => OnChangeFilterHandler('all'), [])}/>
-                <Button active={props.filter === 'active'} name={'active'}
-                        callback={useCallback(() => OnChangeFilterHandler('active'), [])}/>
-                <Button active={props.filter === 'completed'} name={'completed'}
-                        callback={useCallback(() => OnChangeFilterHandler('completed'), [])}/>
+                <Button active={props.filter === 'all'}
+                        callback={useCallback(() => OnChangeFilterHandler('all'), [])}>
+                    all
+                </Button>
+                <Button active={props.filter === 'active'}
+                        callback={useCallback(() => OnChangeFilterHandler('active'), [])}>
+                    active
+                </Button>
+                <Button active={props.filter === 'completed'}
+                        callback={useCallback(() => OnChangeFilterHandler('completed'), [])}>
+                    completed
+                </Button>
             </div>
         </div>
     );
