@@ -8,6 +8,8 @@ import {AppStateType} from "./reducers/store";
 import {RequestStatusType} from "./reducers/app-reducer";
 import {ErrorModal} from "./components/ErrorModal/ErrorModal";
 import {Login} from "./components/Login/Login";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {Error404} from "./components/Error404/Error404";
 
 
 function App() {
@@ -17,9 +19,15 @@ function App() {
         <div className="App">
             {appStatus === 'loading' && <Preloader/>}
             <Header/>
-            <TodoLists/>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<TodoLists/>}/>
+                    <Route path='/login' element={<Login/>}/>
+                    <Route path='/404' element={<Error404/>}/>
+                    <Route path='*' element={<Navigate to='/404'/>}/>
+                </Routes>
+            </BrowserRouter>
             <ErrorModal/>
-            <Login/>
         </div>
     );
 }
