@@ -1,0 +1,67 @@
+.loginPage{
+    padding: 30px 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginPage p{
+    text-align: center;
+    font-size: 18px;
+    line-height: 120%;
+}
+
+.loginPage p:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.loginPage a{
+    text-decoration: underline;
+    color: #67A169;
+    transition: all .3s;
+}
+
+.loginPage a:hover{
+    color: #3e613f;
+}
+
+.title{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.loginPage form{
+    max-width: 500px;
+    width: 100%;
+    margin: 30px auto 0;
+}
+.loginPage input{
+    width: 100%;
+}
+
+.loginPage input:not(:last-child){
+    margin-bottom: 15px;
+}
+
+.loginPage button{
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .loginPage p{
+        font-size: 16px;
+    }
+    .title{
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+    .loginPage form{
+        margin: 20px auto 0;
+    }
+    .loginPage input:not(:last-child){
+        margin-bottom: 10px;
+    }
+}
