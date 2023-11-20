@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux'
+import {AnyAction, Dispatch} from 'redux'
 import {SetAppStatusAC} from "./app-reducer";
 import {authAPI, LoginParamsType, RESULT_CODE} from "../api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
