@@ -1,6 +1,6 @@
 
 const settingsAppState = {
-    status: 'loading' as RequestStatusType,
+    status: 'idle' as RequestStatusType,
     error: ''
 }
 export const appReducer = (state: settingsAppStateType = settingsAppState, action: ActionType): settingsAppStateType => {

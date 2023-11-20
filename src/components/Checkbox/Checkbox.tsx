@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, ComponentProps} from 'react';
 import {Input} from "../Input/Input";
 import s from './Checkbox.module.css'
 
@@ -9,14 +9,12 @@ type CheckboxPropsType = {
     disabled?: boolean
     style?: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
-}
+} & ComponentProps<'input'>
 export const Checkbox: React.FC<CheckboxPropsType> = (props) => {
-    const {label, checked, disabled, style, onChange} = props
+    const {label, style, ...restProps} = props
     return (
         <div className={s.checkbox + ' ' + style}>
-            <Input style={s.checkboxInput} type="checkbox"
-                   checked={checked}
-                   onChange={onChange} disabled={disabled}/>
+            <Input style={s.checkboxInput} type="checkbox" {...restProps}/>
             <label className={s.checkboxLabel}>{label}</label>
         </div>
     );

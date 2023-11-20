@@ -17,3 +17,6 @@ export type AppStateType = ReturnType<typeof RootReducer>
 
 export type ThunkType = ThunkDispatch<AppStateType, any, AnyAction>
 export const useAppDispatch = useDispatch<ThunkType>
+
+// @ts-ignore
+window.store = AppStore;
