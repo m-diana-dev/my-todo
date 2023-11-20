@@ -8,10 +8,11 @@ export type BtnPropsType = {
     className?: string
     children?: React.ReactNode
     disabled?: boolean
+    transparent?: boolean
 }
 export const Button = memo((props: BtnPropsType) => {
-    const buttonStyle = s.button + ' ' + (props.round ? s.round : '') + (props.active ? s.activeFilter : '')
+    const buttonStyle = s.button + ' ' + (props.round ? s.round : '') + (props.active ? s.activeFilter : '') + (props.transparent ? s.transparent : '')
     return (
-        <button onClick={props.callback} disabled={props.disabled} className={buttonStyle}>{props.children}</button>
+        <button type="submit" onClick={props.callback} disabled={props.disabled} className={buttonStyle}>{props.children}</button>
     );
 })

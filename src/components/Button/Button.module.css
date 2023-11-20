@@ -36,6 +36,16 @@
 .button img{
     width: 20px;
 }
+
+.button.transparent{
+    border: 1px solid #3E613F;
+    background-color: #fff;
+}
+
+.button.transparent:hover{
+    background-color: #3e613f;
+    color:#fff;
+}
 @media (max-width: 765px) {
     .button{
         padding: 8px;

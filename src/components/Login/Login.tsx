@@ -4,6 +4,10 @@ import {Button} from "../Button/Button";
 import s from './Login.module.css'
 import {Checkbox} from "../Checkbox/Checkbox";
 import {useFormik} from "formik";
+import {loginTC} from "../../reducers/auth-reducer";
+import {AppStateType, useAppDispatch} from "../../reducers/store";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 export const Login = () => {
     type FormikErrorType = {
@@ -11,6 +15,9 @@ export const Login = () => {
         password?: string
         rememberMe?: boolean
     }
+
+    const dispatch = useAppDispatch();
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
 
     const formik = useFormik({
         initialValues: {
@@ -33,10 +40,15 @@ export const Login = () => {
             return errors
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            // debugger
+            dispatch(loginTC(values))
             formik.resetForm();
         }
     })
+
+    if(isLoggedIn){
+        return <Navigate to={'/'}/>
+    }
     return (
         <div className={s.loginPage}>
             <div className="container">
@@ -53,7 +65,7 @@ export const Login = () => {
                 <form action="" onSubmit={formik.handleSubmit}>
                     <Input placeholder={'Email'} {...formik.getFieldProps('email')}/>
                     {formik.touched.email && formik.errors.email ? <div className={s.formError}>{formik.errors.email}</div> : null}
-                    <Input placeholder={'Password'} {...formik.getFieldProps('password')}/>
+                    <Input placeholder={'Password'} type={'password'} {...formik.getFieldProps('password')}/>
                     {formik.touched.password && formik.errors.password ? <div className={s.formError}>{formik.errors.password}</div> : null}
                     <Checkbox label={'Remember me'} checked={formik.values.rememberMe} {...formik.getFieldProps('rememberMe')}/>
                     <Button callback={() => {

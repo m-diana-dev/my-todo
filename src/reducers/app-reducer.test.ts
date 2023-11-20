@@ -5,7 +5,8 @@ let startState: settingsAppStateType
 beforeEach(() => {
     startState = {
         error: '',
-        status: 'idle'
+        status: 'idle',
+        isInitialized: true
     }
 })
 test('correct error message should be set', () => {

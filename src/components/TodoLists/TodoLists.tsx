@@ -14,6 +14,7 @@ import {
 import {CreateTasksTC} from "../../reducers/tasks-reducer";
 import {TodoList} from "../TodoList/TodoList";
 import {TaskDomainType} from "../../api/todolist-api";
+import {Navigate} from "react-router-dom";
 
 export type TasksType = {
     [id: string]: TaskDomainType[]
@@ -21,10 +22,12 @@ export type TasksType = {
 export const TodoLists = () => {
     const tasks = useSelector<AppStateType, TasksType>(state => state.tasks)
     const todoLists = useSelector<AppStateType, TodolistDomainType[]>(state => state.todolists)
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.auth.isLoggedIn)
 
     const dispatch = useAppDispatch()
 
     useEffect(()=>{
+        if (!isLoggedIn) return
         dispatch(SetTodolistsTC())
     },[dispatch])
 
@@ -47,6 +50,10 @@ export const TodoLists = () => {
     const addTask = useCallback((idTodoList: string, title: string) => {
         dispatch(CreateTasksTC(idTodoList, title))
     },[dispatch])
+
+    if(!isLoggedIn){
+        return <Navigate to={'/login'}/>
+    }
 
     const todoListComponent = todoLists.map(el => {
         return (
