@@ -68,8 +68,7 @@ export const Login = () => {
                     <Input placeholder={'Password'} type={'password'} {...formik.getFieldProps('password')}/>
                     {formik.touched.password && formik.errors.password ? <div className={s.formError}>{formik.errors.password}</div> : null}
                     <Checkbox label={'Remember me'} checked={formik.values.rememberMe} {...formik.getFieldProps('rememberMe')}/>
-                    <Button callback={() => {
-                    }}>Login</Button>
+                    <Button type={'submit'}>Login</Button>
                 </form>
             </div>
         </div>

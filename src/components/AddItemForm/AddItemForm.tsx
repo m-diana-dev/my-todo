@@ -38,7 +38,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
             <Input style={inputStyle} type="text" onChange={OnChangeInputHandler}
                    onKeyDown={onKeyDownHandler}
                    value={inputTitle} error={!!error}/>
-            <Button callback={OnAddTitleHandler} round={true}>
+            <Button onClick={OnAddTitleHandler} round={true}>
                 <img src={add} alt="icon"/>
             </Button>
             {error && <div className='errorMessage'>{error}</div>}

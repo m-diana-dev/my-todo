@@ -57,7 +57,7 @@ export const TodoList = memo((props: todoListPropsType) => {
         <div className={s.todoListItem}>
             <h2 className={s.title}>
                 <EditableSpan title={props.title} onChange={ChangeTodoListTitle} disabled={props.status==='loading'}/>
-                <Button callback={OnTodoListDelHandler} round={true} disabled={props.status==='loading'}>
+                <Button onClick={OnTodoListDelHandler} round={true} disabled={props.status==='loading'}>
                     <img src={del} alt="icon"/>
                 </Button>
             </h2>
@@ -76,15 +76,15 @@ export const TodoList = memo((props: todoListPropsType) => {
             </ul>
             <div className={s.todoListBtns}>
                 <Button active={props.filter === 'all'}
-                        callback={useCallback(() => OnChangeFilterHandler('all'), [])}>
+                        onClick={useCallback(() => OnChangeFilterHandler('all'), [])}>
                     all
                 </Button>
                 <Button active={props.filter === 'active'}
-                        callback={useCallback(() => OnChangeFilterHandler('active'), [])}>
+                        onClick={useCallback(() => OnChangeFilterHandler('active'), [])}>
                     active
                 </Button>
                 <Button active={props.filter === 'completed'}
-                        callback={useCallback(() => OnChangeFilterHandler('completed'), [])}>
+                        onClick={useCallback(() => OnChangeFilterHandler('completed'), [])}>
                     completed
                 </Button>
             </div>

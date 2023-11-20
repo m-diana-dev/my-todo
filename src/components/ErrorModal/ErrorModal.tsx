@@ -28,7 +28,7 @@ export const ErrorModal = () => {
                 <span className={s.title}>Error!</span>
             </div>
             <p>{error}</p>
-            <Button callback={handleClose}>Dismiss</Button>
+            <Button onClick={handleClose}>Dismiss</Button>
         </div>
     )
 }

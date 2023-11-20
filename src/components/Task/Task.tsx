@@ -7,7 +7,6 @@ import {DeleteTaskTC, UpdateTaskTC} from "../../reducers/tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {useAppDispatch} from "../../reducers/store";
 import {RequestStatusType} from "../../reducers/app-reducer";
-import {Input} from "../Input/Input";
 import {Checkbox} from "../Checkbox/Checkbox";
 
 type TaskPropsType = {
@@ -46,7 +45,7 @@ export const Task = memo((props: TaskPropsType) => {
                     <EditableSpan title={props.title} onChange={ChangeTaskTitle} disabled={props.entityStatus==='loading'}/>
                 </div>
             </div>
-            <Button callback={DeleteTask} round={true} disabled={props.entityStatus==='loading'}>
+            <Button onClick={DeleteTask} round={true} disabled={props.entityStatus==='loading'}>
                 <img src={del} alt="icon"/>
             </Button>
         </li>

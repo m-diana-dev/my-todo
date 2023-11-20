@@ -1,18 +1,22 @@
-import React, {memo} from 'react';
+import React, {ComponentProps, memo} from 'react';
 import s from './Button.module.css'
 
 export type BtnPropsType = {
-    callback: () => void
     round?: boolean
     active?: boolean
-    className?: string
     children?: React.ReactNode
-    disabled?: boolean
     transparent?: boolean
-}
-export const Button = memo((props: BtnPropsType) => {
-    const buttonStyle = s.button + ' ' + (props.round ? s.round : '') + (props.active ? s.activeFilter : '') + (props.transparent ? s.transparent : '')
+    // className?: string
+
+
+    // disabled?: boolean
+    // callback: () => void
+} & ComponentProps<'button'>
+export const Button: React.FC<BtnPropsType> = memo((props) => {
+    const{round,active, children, transparent,  ...restProps} = props;
+
+    const buttonStyle = s.button + ' ' + (round ? s.round : '') + (active ? s.activeFilter : '') + (transparent ? s.transparent : '')
     return (
-        <button type="submit" onClick={props.callback} disabled={props.disabled} className={buttonStyle}>{props.children}</button>
+        <button {...restProps} className={buttonStyle}>{children}</button>
     );
 })

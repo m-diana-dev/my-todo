@@ -17,7 +17,7 @@ export const Header = memo(() => {
             <div className="container">
                 <div className={s.headerWrapp}>
                     <h1><span>📄</span>TodoList</h1>
-                    {isLoggedIn && <Button callback={onClickHandler} transparent={true}>LogOut</Button>}
+                    {isLoggedIn && <Button onClick={onClickHandler} transparent={true}>LogOut</Button>}
                 </div>
             </div>
         </header>
