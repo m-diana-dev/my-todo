@@ -26,6 +26,12 @@ FilterButton.args = {
     children: 'Active'
 }
 
+export const LogOutButton = Template.bind({})
+LogOutButton.args = {
+    children: 'LogOut',
+    transparent: true
+}
+
 export const DeleteButton = Template.bind({})
 DeleteButton.args = {
     children: <img src={del} alt="icon"/>,

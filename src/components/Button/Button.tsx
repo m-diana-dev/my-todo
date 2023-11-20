@@ -6,11 +6,6 @@ export type BtnPropsType = {
     active?: boolean
     children?: React.ReactNode
     transparent?: boolean
-    // className?: string
-
-
-    // disabled?: boolean
-    // callback: () => void
 } & ComponentProps<'button'>
 export const Button: React.FC<BtnPropsType> = memo((props) => {
     const{round,active, children, transparent,  ...restProps} = props;
