@@ -1,13 +1,13 @@
-.AddItemForm{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+.AddItemForm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 .inputWidth {
-    width: calc(100% - 50px);
+  width: calc(100% - 50px);
 }
-.disabled{
-    opacity: 0.5;
-    pointer-events: none;
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

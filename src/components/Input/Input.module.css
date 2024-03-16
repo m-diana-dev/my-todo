@@ -1,26 +1,25 @@
-
 .input {
-    display: block;
-    padding: 0 10px;
-    border-radius: 5px;
-    border: 1px solid #867f7f;
-    height: 32px;
-    background-color: #fff;
-    font-size: 18px;
-    line-height: 120%;
+  display: block;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #867f7f;
+  height: 32px;
+  background-color: #fff;
+  font-size: 18px;
+  line-height: 120%;
 }
 
 .errorInput {
-    border-color: #cb4949;
+  border-color: #cb4949;
 }
 
 @media (max-width: 991px) {
-    .input {
-        font-size: 16px;
-    }
+  .input {
+    font-size: 16px;
+  }
 }
 @media (max-width: 765px) {
-    .input {
-        height: 30px;
-    }
+  .input {
+    height: 30px;
+  }
 }

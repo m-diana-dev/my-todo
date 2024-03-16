@@ -1,29 +1,29 @@
-.header{
-    padding: 20px 0;
-    background-color: #7FC780;
+.header {
+  padding: 20px 0;
+  background-color: #7fc780;
 }
 
-.headerWrapp{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.headerWrapp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.header h1{
-    font-size: 30px;
-    font-weight: 700;
+.header h1 {
+  font-size: 30px;
+  font-weight: 700;
 }
-.header h1 span{
-    margin-right: 10px;
+.header h1 span {
+  margin-right: 10px;
 }
 
 @media (max-width: 765px) {
-    .header{
-        padding: 15px 0;
-    }
-    .header h1{
-        font-size: 26px;
-    }
-    .header h1 span{
-        margin-right: 7px;
-    }
+  .header {
+    padding: 15px 0;
+  }
+  .header h1 {
+    font-size: 26px;
+  }
+  .header h1 span {
+    margin-right: 7px;
+  }
 }

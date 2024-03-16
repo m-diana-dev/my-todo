@@ -1,61 +1,61 @@
-.button{
-    padding: 10px;
-    background-color: #7FC780;
-    border-radius: 5px;
-    transition: all .3s;
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
+.button {
+  padding: 10px;
+  background-color: #7fc780;
+  border-radius: 5px;
+  transition: all 0.3s;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
 }
-.button:hover{
-    background-color:#67A169;
+.button:hover {
+  background-color: #67a169;
 }
 
-.button:disabled{
-    opacity: 0.5;
-    pointer-events: none;
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .button.activeFilter {
-    color: #fff;
-    background-color: #3E613F;
+  color: #fff;
+  background-color: #3e613f;
 }
 .button.round {
-    border: 1px solid #3E613F;
-    border-radius:35%;
-    background: #fff;
-    padding: 5px;
-    max-width: 32px;
-    max-height: 32px;
+  border: 1px solid #3e613f;
+  border-radius: 35%;
+  background: #fff;
+  padding: 5px;
+  max-width: 32px;
+  max-height: 32px;
 }
 .button.round:hover {
-    border-color: #7FC780;
-    background: #7FC780;
+  border-color: #7fc780;
+  background: #7fc780;
 }
-.button img{
-    width: 20px;
-}
-
-.button.transparent{
-    border: 1px solid #3E613F;
-    background-color: #fff;
+.button img {
+  width: 20px;
 }
 
-.button.transparent:hover{
-    background-color: #3e613f;
-    color:#fff;
+.button.transparent {
+  border: 1px solid #3e613f;
+  background-color: #fff;
+}
+
+.button.transparent:hover {
+  background-color: #3e613f;
+  color: #fff;
 }
 @media (max-width: 765px) {
-    .button{
-        padding: 8px;
-        border-radius: 5px;
-        font-size: 15px;
-    }
-    .button.round {
-        border-radius:33%;
-        padding: 4px;
-        max-width: 30px;
-        max-height: 30px;
-    }
+  .button {
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  .button.round {
+    border-radius: 33%;
+    padding: 4px;
+    max-width: 30px;
+    max-height: 30px;
+  }
 }

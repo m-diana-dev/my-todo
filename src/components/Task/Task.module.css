@@ -1,33 +1,33 @@
-.task{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    gap: 15px;
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  gap: 15px;
 }
-.taskWrapp{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: calc(100% - 47px);
+.taskWrapp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% - 47px);
 }
-.taskText{
-    width: calc(100% - 25px);
+.taskText {
+  width: calc(100% - 25px);
 }
-.task:not(:last-child){
-    margin-bottom: 10px;
+.task:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .isDone {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
-.isDone .taskText{
-    opacity: 0.6;
+.isDone .taskText {
+  opacity: 0.6;
 }
 
 @media (max-width: 991px) {
-    .task{
-        font-size: 16px;
-    }
+  .task {
+    font-size: 16px;
+  }
 }

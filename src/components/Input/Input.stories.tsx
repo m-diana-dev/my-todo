@@ -1,25 +1,23 @@
-import {Meta, StoryFn} from "@storybook/react";
-import React from "react";
-import {Input, InputPropsType} from "./Input";
-
+import { Meta, StoryFn } from "@storybook/react"
+import React from "react"
+import { Input, InputPropsType } from "./Input"
 
 const meta: Meta<typeof Input> = {
-    title: 'Input',
-    component: Input
+  title: "Input",
+  component: Input,
 }
 
+export default meta
 
-export default meta;
-
-const Template: StoryFn<InputPropsType> = (arg: any) => <Input {...arg}/>
+const Template: StoryFn<InputPropsType> = (arg: any) => <Input {...arg} />
 
 export const SimpleInput = Template.bind({})
 SimpleInput.args = {
-    value: 'Simple Input'
+  value: "Simple Input",
 }
 
 export const ErrorInput = Template.bind({})
 ErrorInput.args = {
-    value: 'Error Input',
-    error: true,
+  value: "Error Input",
+  error: true,
 }

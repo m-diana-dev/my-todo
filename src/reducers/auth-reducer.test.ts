@@ -1,16 +1,14 @@
-import {authReducer, setIsLoggedInAC} from "./auth-reducer";
+import { authReducer, setIsLoggedInAC } from "./auth-reducer"
 
-
-let startState: {isLoggedIn: boolean}
+let startState: { isLoggedIn: boolean }
 beforeEach(() => {
-    startState = {
-        isLoggedIn: false
-    }
+  startState = {
+    isLoggedIn: false,
+  }
 })
-test('correct logged status should be set', () => {
-    const endState: {isLoggedIn: boolean} = authReducer(startState, setIsLoggedInAC(true))
+test("correct logged status should be set", () => {
+  const endState: { isLoggedIn: boolean } = authReducer(startState, setIsLoggedInAC(true))
 
-    expect(endState.isLoggedIn).toBe(true);
-    expect(startState.isLoggedIn).toBe(false);
+  expect(endState.isLoggedIn).toBe(true)
+  expect(startState.isLoggedIn).toBe(false)
 })
-

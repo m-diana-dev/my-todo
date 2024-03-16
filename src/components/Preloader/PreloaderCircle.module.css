@@ -1,23 +1,23 @@
-.PreloaderCircle{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.PreloaderCircle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.PreloaderCircle img{
-    width: 204px;
-    height: 204px;
-    object-fit: cover;
+.PreloaderCircle img {
+  width: 204px;
+  height: 204px;
+  object-fit: cover;
 }
 
 @media (max-width: 786px) {
-    .PreloaderCircle img{
-        width: 130px;
-        height: 130px;
-        object-fit: cover;
-    }
+  .PreloaderCircle img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+  }
 }
