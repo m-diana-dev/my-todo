@@ -3,11 +3,11 @@ import s from "./Task.module.css"
 import { EditableSpan } from "../EditableSpan/EditableSpan"
 import { Button } from "../Button/Button"
 import del from "../../image/delete.svg"
-import { DeleteTaskTC, UpdateTaskTC } from "../../reducers/tasks-reducer"
-import { TaskStatuses } from "../../api/todolist-api"
-import { useAppDispatch } from "../../reducers/store"
-import { RequestStatusType } from "../../reducers/app-reducer"
+import { DeleteTaskTC, UpdateTaskTC } from "reducers/tasks-reducer"
+import { useAppDispatch } from "reducers/store"
+import { RequestStatusType } from "reducers/app-reducer"
 import { Checkbox } from "../Checkbox/Checkbox"
+import { TaskStatuses } from "api/todolist-api"
 
 type TaskPropsType = {
   id: string
