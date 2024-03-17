@@ -1,6 +1,6 @@
-import { appReducer, SetAppErrorAC, SetAppInitializedAC, SetAppStatusAC, settingsAppStateType } from "./app-reducer"
+import { appActions, appReducer, AppState } from "./app-reducer"
 
-let startState: settingsAppStateType
+let startState: AppState
 beforeEach(() => {
   startState = {
     error: "",
@@ -9,21 +9,21 @@ beforeEach(() => {
   }
 })
 test("correct error message should be set", () => {
-  const endState: settingsAppStateType = appReducer(startState, SetAppErrorAC("some message"))
+  const endState: AppState = appReducer(startState, appActions.setAppError({ error: "some message" }))
 
   expect(endState.error).toBe("some message")
   expect(startState.error).toBe("")
 })
 
 test("correct status message should be set", () => {
-  const endState: settingsAppStateType = appReducer(startState, SetAppStatusAC("loading"))
+  const endState: AppState = appReducer(startState, appActions.setAppStatus({ status: "loading" }))
 
   expect(endState.status).toBe("loading")
   expect(startState.status).toBe("idle")
 })
 
 test("correct initialization status should be set", () => {
-  const endState: settingsAppStateType = appReducer(startState, SetAppInitializedAC(false))
+  const endState: AppState = appReducer(startState, appActions.setAppInitialized({ initialized: false }))
 
   expect(endState.isInitialized).toBe(false)
   expect(startState.isInitialized).toBe(true)

@@ -72,7 +72,7 @@ export const TodoList = memo((props: todoListPropsType) => {
       </h2>
       <AddItemForm addTitle={addTask} disabled={props.status === "loading"} />
       <ul className={s.todoListList}>
-        {filteredTasks().map((el) => {
+        {filteredTasks()?.map((el) => {
           return (
             <Task
               key={el.id}

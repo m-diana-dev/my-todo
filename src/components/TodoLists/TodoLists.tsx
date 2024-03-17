@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect } from "react"
 import { AddItemForm } from "../AddItemForm/AddItemForm"
 import { useSelector } from "react-redux"
-import { AppStateType, useAppDispatch } from "../../reducers/store"
+import { AppStateType, useAppDispatch } from "reducers/store"
 import {
-  ChangeTodoListFilterAC,
   CreateTodolistTC,
   DeleteTodolistTC,
   FilterType,
   SetTodolistsTC,
   TodolistDomainType,
+  todoListsActions,
   UpdateTodolistTC,
-} from "../../reducers/todolists-reducer"
-import { CreateTasksTC } from "../../reducers/tasks-reducer"
+} from "reducers/todolists-reducer"
+import { CreateTasksTC } from "reducers/tasks-reducer"
 import { TodoList } from "../TodoList/TodoList"
-import { TaskDomainType } from "../../api/todolist-api"
+import { TaskDomainType } from "api/todolist-api"
 import { Navigate } from "react-router-dom"
 
 export type TasksType = {
@@ -40,7 +40,7 @@ export const TodoLists = () => {
 
   const ChangeFilter = useCallback(
     (idTodoList: string, filter: FilterType) => {
-      dispatch(ChangeTodoListFilterAC(idTodoList, filter))
+      dispatch(todoListsActions.changeTodoListFilter({ id: idTodoList, filter }))
     },
     [dispatch],
   )

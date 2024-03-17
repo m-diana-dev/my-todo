@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import s from "./ErrorModal.module.css"
 import { Button } from "../Button/Button"
 import errorImg from "../../image/error.png"
 import { useSelector } from "react-redux"
-import { AppStateType, useAppDispatch } from "../../reducers/store"
-import { SetAppErrorAC } from "../../reducers/app-reducer"
+import { AppStateType, useAppDispatch } from "reducers/store"
+import { appActions } from "reducers/app-reducer"
+
 export const ErrorModal = () => {
   const error = useSelector<AppStateType, string>((state) => state.app.error)
   const dispatch = useAppDispatch()
@@ -17,7 +18,7 @@ export const ErrorModal = () => {
   }, [error])
 
   const handleClose = () => {
-    dispatch(SetAppErrorAC(""))
+    dispatch(appActions.setAppError({ error: "" }))
   }
 
   const modalOpen = error ? "" : s.hide

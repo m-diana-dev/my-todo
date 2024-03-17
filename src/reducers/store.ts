@@ -1,10 +1,11 @@
-import { AnyAction, applyMiddleware, combineReducers, createStore } from "redux"
+import { AnyAction, combineReducers } from "redux"
 import { tasksReducer } from "./tasks-reducer"
 import { todoListsReducer } from "./todolists-reducer"
-import thunk, { ThunkDispatch } from "redux-thunk"
+import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { useDispatch } from "react-redux"
 import { appReducer } from "./app-reducer"
 import { authReducer } from "./auth-reducer"
+import { configureStore } from "@reduxjs/toolkit"
 
 export const RootReducer = combineReducers({
   tasks: tasksReducer,
@@ -13,11 +14,15 @@ export const RootReducer = combineReducers({
   auth: authReducer,
 })
 
-export const AppStore = createStore(RootReducer, applyMiddleware(thunk))
+export const AppStore = configureStore({
+  reducer: RootReducer,
+})
 
 export type AppStateType = ReturnType<typeof RootReducer>
 
-export type ThunkType = ThunkDispatch<AppStateType, any, AnyAction>
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AnyAction>
+
+export type ThunkType = ThunkDispatch<AppStateType, unknown, AnyAction>
 export const useAppDispatch = useDispatch<ThunkType>
 
 // @ts-ignore
