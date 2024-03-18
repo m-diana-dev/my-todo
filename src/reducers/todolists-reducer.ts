@@ -1,8 +1,11 @@
 import { RESULT_CODE, todolistAPI, TodolistType } from "api/todolist-api"
-import { Dispatch } from "redux"
+import { AnyAction, Dispatch } from "redux"
 import { appActions, RequestStatusType } from "./app-reducer"
 import { handleServerAppError, handleServerNetworkError } from "utils/error-utils"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { SetTasksTC } from "reducers/tasks-reducer"
+import { ThunkDispatch } from "redux-thunk"
+import { AppStateType } from "reducers/store"
 
 const slice = createSlice({
   name: "todolists",
@@ -33,6 +36,11 @@ const slice = createSlice({
       })
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(appActions.clearData, () => {
+      return []
+    })
+  },
 })
 
 //TYPES
@@ -43,13 +51,19 @@ export type TodolistDomainType = TodolistType & {
 }
 
 //TC
-export const SetTodolistsTC = () => (dispatch: Dispatch) => {
+export const SetTodolistsTC = () => (dispatch: ThunkDispatch<AppStateType, any, AnyAction>) => {
   dispatch(appActions.setAppStatus({ status: "loading" }))
   todolistAPI
     .getTodolists()
     .then((res) => {
       dispatch(todoListsActions.setTodolists({ todolists: res.data }))
       dispatch(appActions.setAppStatus({ status: "succeeded" }))
+      return res.data
+    })
+    .then((todos) => {
+      todos.forEach((todo) => {
+        dispatch(SetTasksTC(todo.id))
+      })
     })
     .catch((e) => {
       handleServerNetworkError(e, dispatch)

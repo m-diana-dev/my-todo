@@ -20,6 +20,9 @@ const slice = createSlice({
     setAppInitialized: (state, action: PayloadAction<{ initialized: boolean }>) => {
       state.isInitialized = action.payload.initialized
     },
+    clearData: (state) => {
+      state.error = ""
+    },
   },
 })
 

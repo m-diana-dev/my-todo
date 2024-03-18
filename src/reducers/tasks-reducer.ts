@@ -57,6 +57,9 @@ const slice = createSlice({
           state[el.id] = []
         })
       })
+      .addCase(appActions.clearData, () => {
+        return {}
+      })
   },
 })
 

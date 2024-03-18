@@ -25,12 +25,6 @@ type todoListPropsType = {
 }
 
 export const TodoList = memo((props: todoListPropsType) => {
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(SetTasksTC(props.id))
-  }, [])
-
   const OnTodoListDelHandler = useCallback(() => {
     props.DeleteTodoList(props.id)
   }, [props.DeleteTodoList, props.id])
