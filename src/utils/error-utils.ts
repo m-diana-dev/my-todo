@@ -1,6 +1,7 @@
 import { Dispatch } from "redux"
 import { ResponseType } from "api/todolist-api"
 import { appActions } from "reducers/app-reducer"
+import axios from "axios"
 
 // generic function
 export const handleServerAppError = <D>(data: ResponseType<D>, dispatch: Dispatch) => {
@@ -12,7 +13,16 @@ export const handleServerAppError = <D>(data: ResponseType<D>, dispatch: Dispatc
   }
 }
 
-export const handleServerNetworkError = (error: { message: string }, dispatch: Dispatch) => {
-  dispatch(appActions.setAppError({ error: error.message }))
+export const handleServerNetworkError = (err: unknown, dispatch: Dispatch): void => {
+  let errorMessage = "Some error occurred"
+  if (axios.isAxiosError(err)) {
+    errorMessage = err.response?.data?.message || err?.message || errorMessage
+  } else if (err instanceof Error) {
+    errorMessage = `Native error: ${err.message}`
+  } else {
+    errorMessage = JSON.stringify(err)
+  }
+
+  dispatch(appActions.setAppError({ error: errorMessage }))
   dispatch(appActions.setAppStatus({ status: "failed" }))
 }

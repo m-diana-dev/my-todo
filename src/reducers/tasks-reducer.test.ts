@@ -1,4 +1,4 @@
-import { tasksActions, tasksReducer } from "./tasks-reducer"
+import { tasksActions, tasksReducer, tasksThunks, UpdateDomainTaskModelType } from "./tasks-reducer"
 import { TaskPriorities, TaskStatuses, TaskType, TodolistType } from "api/todolist-api"
 import { TasksType } from "components/TodoLists/TodoLists"
 import { todoListsActions } from "reducers/todolists-reducer"
@@ -91,7 +91,11 @@ beforeEach(() => {
   }
 })
 test("correct task should be deleted from correct array", () => {
-  const action = tasksActions.removeTask({ taskID: "2", todoListID: "todolistId2" })
+  // const action = tasksActions.removeTask({ taskID: "2", todoListID: "todolistId2" })
+  const action = tasksThunks.deleteTask.fulfilled({ taskID: "2", todolistID: "todolistId2" }, "requestId", {
+    taskID: "2",
+    todolistID: "todolistId2",
+  })
 
   const endState = tasksReducer(startState, action)
 
@@ -181,7 +185,10 @@ test("correct task should be added to correct array", () => {
     order: 0,
     priority: TaskPriorities.Low,
   }
-  const action = tasksActions.addTask({ task: newTask })
+  const action = tasksThunks.createTask.fulfilled({ task: newTask }, "requestId", {
+    title: newTask.title,
+    todolistID: newTask.todoListId,
+  })
 
   const endState = tasksReducer(startState, action)
 
@@ -193,11 +200,12 @@ test("correct task should be added to correct array", () => {
 })
 
 test("status of specified task should be changed", () => {
-  const action = tasksActions.updateTask({
+  const updatedTask = {
     taskID: "2",
-    model: { status: TaskStatuses.New },
-    todoListID: "todolistId2",
-  })
+    domainModel: { status: TaskStatuses.New },
+    todolistID: "todolistId2",
+  }
+  const action = tasksThunks.updateTask.fulfilled(updatedTask, "requestId", updatedTask)
 
   const endState = tasksReducer(startState, action)
 
@@ -206,11 +214,12 @@ test("status of specified task should be changed", () => {
 })
 
 test("title of specified task should be changed", () => {
-  const action = tasksActions.updateTask({
+  const updatedTask = {
     taskID: "3",
-    model: { title: "green tea" },
-    todoListID: "todolistId2",
-  })
+    domainModel: { title: "green tea" },
+    todolistID: "todolistId2",
+  }
+  const action = tasksThunks.updateTask.fulfilled(updatedTask, "requestId", updatedTask)
 
   const endState = tasksReducer(startState, action)
 

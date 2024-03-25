@@ -11,10 +11,10 @@ import {
   todoListsActions,
   UpdateTodolistTC,
 } from "reducers/todolists-reducer"
-import { CreateTasksTC } from "reducers/tasks-reducer"
 import { TodoList } from "../TodoList/TodoList"
 import { TaskDomainType } from "api/todolist-api"
 import { Navigate } from "react-router-dom"
+import { tasksThunks } from "reducers/tasks-reducer"
 
 export type TasksType = {
   [id: string]: TaskDomainType[]
@@ -60,8 +60,8 @@ export const TodoLists = () => {
   )
 
   const addTask = useCallback(
-    (idTodoList: string, title: string) => {
-      dispatch(CreateTasksTC(idTodoList, title))
+    (todolistID: string, title: string) => {
+      dispatch(tasksThunks.createTask({ todolistID, title }))
     },
     [dispatch],
   )

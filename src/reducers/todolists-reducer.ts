@@ -3,9 +3,9 @@ import { AnyAction, Dispatch } from "redux"
 import { appActions, RequestStatusType } from "./app-reducer"
 import { handleServerAppError, handleServerNetworkError } from "utils/error-utils"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { SetTasksTC } from "reducers/tasks-reducer"
 import { ThunkDispatch } from "redux-thunk"
 import { AppStateType } from "reducers/store"
+import { tasksThunks } from "reducers/tasks-reducer"
 
 const slice = createSlice({
   name: "todolists",
@@ -62,7 +62,7 @@ export const SetTodolistsTC = () => (dispatch: ThunkDispatch<AppStateType, any, 
     })
     .then((todos) => {
       todos.forEach((todo) => {
-        dispatch(SetTasksTC(todo.id))
+        dispatch(tasksThunks.setTasks(todo.id))
       })
     })
     .catch((e) => {

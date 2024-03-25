@@ -3,7 +3,7 @@ import s from "./Task.module.css"
 import { EditableSpan } from "../EditableSpan/EditableSpan"
 import { Button } from "../Button/Button"
 import del from "../../image/delete.svg"
-import { DeleteTaskTC, UpdateTaskTC } from "reducers/tasks-reducer"
+import { tasksThunks } from "reducers/tasks-reducer"
 import { useAppDispatch } from "reducers/store"
 import { RequestStatusType } from "reducers/app-reducer"
 import { Checkbox } from "../Checkbox/Checkbox"
@@ -20,12 +20,12 @@ export const Task = memo((props: TaskPropsType) => {
   const dispatch = useAppDispatch()
 
   const DeleteTask = useCallback(() => {
-    dispatch(DeleteTaskTC(props.idTodoList, props.id))
+    dispatch(tasksThunks.deleteTask({ todolistID: props.idTodoList, taskID: props.id }))
   }, [dispatch])
 
   const ChangeTaskTitle = useCallback(
     (title: string) => {
-      dispatch(UpdateTaskTC(props.idTodoList, props.id, { title: title }))
+      dispatch(tasksThunks.updateTask({ todolistID: props.idTodoList, taskID: props.id, domainModel: { title } }))
     },
     [dispatch],
   )
@@ -33,8 +33,12 @@ export const Task = memo((props: TaskPropsType) => {
   const ChangeTaskStatus = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       dispatch(
-        UpdateTaskTC(props.idTodoList, props.id, {
-          status: e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New,
+        tasksThunks.updateTask({
+          todolistID: props.idTodoList,
+          taskID: props.id,
+          domainModel: {
+            status: e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New,
+          },
         }),
       )
     },

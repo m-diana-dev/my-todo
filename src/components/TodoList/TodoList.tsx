@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from "react"
+import React, { memo, useCallback } from "react"
 import "../../App.css"
 import { Button } from "../Button/Button"
 import { AddItemForm } from "../AddItemForm/AddItemForm"
@@ -6,11 +6,9 @@ import { EditableSpan } from "../EditableSpan/EditableSpan"
 import del from "../../image/delete.svg"
 import s from "./TodoLIst.module.css"
 import { Task } from "../Task/Task"
-import { TaskDomainType, TaskStatuses, TaskType } from "../../api/todolist-api"
-import { FilterType } from "../../reducers/todolists-reducer"
-import { useAppDispatch } from "../../reducers/store"
-import { SetTasksTC } from "../../reducers/tasks-reducer"
-import { RequestStatusType } from "../../reducers/app-reducer"
+import { TaskDomainType, TaskStatuses } from "api/todolist-api"
+import { FilterType } from "reducers/todolists-reducer"
+import { RequestStatusType } from "reducers/app-reducer"
 
 type todoListPropsType = {
   id: string
