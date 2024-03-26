@@ -2,15 +2,7 @@ import React, { useCallback, useEffect } from "react"
 import { AddItemForm } from "../AddItemForm/AddItemForm"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "reducers/store"
-import {
-  CreateTodolistTC,
-  DeleteTodolistTC,
-  FilterType,
-  SetTodolistsTC,
-  TodolistDomainType,
-  todoListsActions,
-  UpdateTodolistTC,
-} from "reducers/todolists-reducer"
+import { FilterType, TodolistDomainType, todoListsActions, todoListThunks } from "reducers/todolists-reducer"
 import { TodoList } from "../TodoList/TodoList"
 import { TaskDomainType } from "api/todolist-api"
 import { Navigate } from "react-router-dom"
@@ -28,12 +20,12 @@ export const TodoLists = () => {
 
   useEffect(() => {
     if (!isLoggedIn) return
-    dispatch(SetTodolistsTC())
+    dispatch(todoListThunks.setTodolists())
   }, [dispatch])
 
   const DeleteTodoList = useCallback(
-    (idTodoList: string) => {
-      dispatch(DeleteTodolistTC(idTodoList))
+    (todolistID: string) => {
+      dispatch(todoListThunks.deleteTodolist({ todolistID }))
     },
     [dispatch],
   )
@@ -46,15 +38,15 @@ export const TodoLists = () => {
   )
 
   const ChangeTodoListTitle = useCallback(
-    (idTodoList: string, title: string) => {
-      dispatch(UpdateTodolistTC(idTodoList, title))
+    (todolistID: string, title: string) => {
+      dispatch(todoListThunks.updateTodolist({ todolistID, title }))
     },
     [dispatch],
   )
 
   const addTodoList = useCallback(
     (title: string) => {
-      dispatch(CreateTodolistTC(title))
+      dispatch(todoListThunks.createTodolist({ title }))
     },
     [dispatch],
   )

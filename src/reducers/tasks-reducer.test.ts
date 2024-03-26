@@ -1,7 +1,7 @@
 import { tasksActions, tasksReducer, tasksThunks, UpdateDomainTaskModelType } from "./tasks-reducer"
 import { TaskPriorities, TaskStatuses, TaskType, TodolistType } from "api/todolist-api"
 import { TasksType } from "components/TodoLists/TodoLists"
-import { todoListsActions } from "reducers/todolists-reducer"
+import { todoListsActions, todoListThunks } from "reducers/todolists-reducer"
 
 let startState: TasksType = {}
 beforeEach(() => {
@@ -321,7 +321,8 @@ test("new array should be added when new todolist is added", () => {
     order: 0,
   }
 
-  const action = todoListsActions.addTodoList({ todolist: newTodolist })
+  // const action = todoListsActions.addTodoList({ todolist: newTodolist })
+  const action = todoListThunks.createTodolist.fulfilled({ todolist: newTodolist }, "requestId", newTodolist)
 
   const endState = tasksReducer(startState, action)
 
@@ -336,7 +337,9 @@ test("new array should be added when new todolist is added", () => {
 })
 
 test("property with todolistId should be deleted", () => {
-  const action = todoListsActions.deleteTodoList({ id: "todolistId2" })
+  const action = todoListThunks.deleteTodolist.fulfilled({ todolistID: "todolistId2" }, "requestId", {
+    todolistID: "todolistId2",
+  })
 
   const endState = tasksReducer(startState, action)
 

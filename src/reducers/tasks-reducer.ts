@@ -11,7 +11,7 @@ import { TasksType } from "components/TodoLists/TodoLists"
 import { appActions, RequestStatusType } from "./app-reducer"
 import { handleServerAppError, handleServerNetworkError } from "utils/error-utils"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { todoListsActions } from "reducers/todolists-reducer"
+import { todoListsActions, todoListThunks } from "reducers/todolists-reducer"
 import { createAppAsyncThunk } from "utils/createAppAsyncThunk"
 
 const slice = createSlice({
@@ -50,13 +50,13 @@ const slice = createSlice({
         const index = state[action.payload.todolistID].findIndex((el) => el.id === action.payload.taskID)
         if (index !== -1) state[action.payload.todolistID].splice(index, 1)
       })
-      .addCase(todoListsActions.addTodoList, (state, action) => {
+      .addCase(todoListThunks.createTodolist.fulfilled, (state, action) => {
         state[action.payload.todolist.id] = []
       })
-      .addCase(todoListsActions.deleteTodoList, (state, action) => {
-        delete state[action.payload.id]
+      .addCase(todoListThunks.deleteTodolist.fulfilled, (state, action) => {
+        delete state[action.payload.todolistID]
       })
-      .addCase(todoListsActions.setTodolists, (state, action) => {
+      .addCase(todoListThunks.setTodolists.fulfilled, (state, action) => {
         action.payload.todolists.forEach((el) => {
           state[el.id] = []
         })
