@@ -43,14 +43,14 @@ export const Task = memo((props: TaskPropsType) => {
     [dispatch],
   )
 
-  const checkoxDisabled = props.entityStatus === "loading" ? "disabled" : undefined
+  const checkboxDisabled = props.entityStatus === "loading" ? "disabled" : undefined
   return (
     <li key={props.id} className={s.task + " " + (props.status === TaskStatuses.Completed ? s.isDone : undefined)}>
       <div className={s.taskWrapp}>
         <Checkbox
           disabled={props.entityStatus === "loading"}
           checked={props.status === TaskStatuses.Completed}
-          style={checkoxDisabled}
+          style={checkboxDisabled}
           onChange={ChangeTaskStatus}
         />
         <div className={s.taskText}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { memo, useEffect } from "react"
 import s from "common/components/ErrorModal/ErrorModal.module.css"
 import errorImg from "assets/image/error.png"
 import { useSelector } from "react-redux"
@@ -6,15 +6,18 @@ import { AppStateType, useAppDispatch } from "app/store"
 import { appActions } from "app/app-reducer"
 import { Button } from "common/components"
 
-export const ErrorModal = () => {
+export const ErrorModal = memo(() => {
   const error = useSelector<AppStateType, string>((state) => state.app.error)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    setTimeout(() => {
+    const timerId = setTimeout(() => {
       handleClose()
     }, 6000)
-    console.log("useEffect")
+
+    return () => {
+      clearTimeout(timerId)
+    }
   }, [error])
 
   const handleClose = () => {
@@ -32,4 +35,4 @@ export const ErrorModal = () => {
       <Button onClick={handleClose}>Dismiss</Button>
     </div>
   )
-}
+})

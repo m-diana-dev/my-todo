@@ -64,6 +64,7 @@ const setTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }>(
       dispatch(appActions.setAppStatus({ status: "succeeded" }))
       return { todolists: res.data }
     } catch (e) {
+      dispatch(appActions.setAppStatus({ status: "failed" }))
       handleServerNetworkError(e, dispatch)
       return rejectWithValue(null)
     }
@@ -82,10 +83,12 @@ const createTodolist = createAppAsyncThunk<{ todolist: TodolistType }, { title: 
         return { todolist: res.data.data.item }
       } else {
         handleServerAppError(res.data, dispatch)
+        dispatch(appActions.setAppStatus({ status: "failed" }))
         return rejectWithValue(null)
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "failed" }))
       return rejectWithValue(null)
     }
   },
@@ -104,10 +107,14 @@ const deleteTodolist = createAppAsyncThunk<DeleteTodolistArgs, DeleteTodolistArg
         return { todolistID: arg.todolistID }
       } else {
         handleServerAppError(res.data, dispatch)
+        dispatch(appActions.setAppStatus({ status: "failed" }))
+        dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
         return rejectWithValue(null)
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "failed" }))
+      dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
       return rejectWithValue(null)
     }
   },
@@ -117,17 +124,23 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
     dispatch(appActions.setAppStatus({ status: "loading" }))
+    dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "loading" }))
     try {
       const res = await todolistApi.updateTodolist(arg)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
         dispatch(appActions.setAppStatus({ status: "succeeded" }))
+        dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "succeeded" }))
         return arg
       } else {
         handleServerAppError(res.data, dispatch)
+        dispatch(appActions.setAppStatus({ status: "failed" }))
+        dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
         return rejectWithValue(null)
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "failed" }))
+      dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
       return rejectWithValue(null)
     }
   },

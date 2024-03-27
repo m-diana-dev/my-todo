@@ -79,6 +79,7 @@ const setTasks = createAppAsyncThunk<{ todolistID: string; tasks: TaskType[] }, 
       return { todolistID, tasks: res.data.items }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "succeeded" }))
       return rejectWithValue(null)
     }
   },
@@ -96,10 +97,12 @@ const createTask = createAppAsyncThunk<{ task: TaskType }, CreateTaskArgs>(
         return { task: res.data.data.item }
       } else {
         handleServerAppError(res.data, dispatch)
+        dispatch(appActions.setAppStatus({ status: "failed" }))
         return rejectWithValue(null)
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "failed" }))
       return rejectWithValue(null)
     }
   },
@@ -121,10 +124,18 @@ const deleteTask = createAppAsyncThunk<DeleteTaskArgs, DeleteTaskArgs>(
         return arg
       } else {
         handleServerAppError(res.data, dispatch)
+        dispatch(appActions.setAppStatus({ status: "failed" }))
+        dispatch(
+          tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "failed" }),
+        )
         return rejectWithValue(null)
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
+      dispatch(appActions.setAppStatus({ status: "failed" }))
+      dispatch(
+        tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "failed" }),
+      )
       return rejectWithValue(null)
     }
   },
@@ -173,10 +184,25 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
         return arg
       } else {
         handleServerAppError(res.data, dispatch)
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
+        dispatch(appActions.setAppStatus({ status: "failed" }))
+        dispatch(
+          tasksActions.changeTaskEntityStatus({
+            todolistID: arg.todolistID,
+            taskID: arg.taskID,
+            status: "failed",
+          }),
+        )
         return rejectWithValue(null)
       }
     } catch (e) {
+      dispatch(appActions.setAppStatus({ status: "failed" }))
+      dispatch(
+        tasksActions.changeTaskEntityStatus({
+          todolistID: arg.todolistID,
+          taskID: arg.taskID,
+          status: "failed",
+        }),
+      )
       handleServerNetworkError(e, dispatch)
       return rejectWithValue(null)
     }
