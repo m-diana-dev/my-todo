@@ -1,13 +1,13 @@
 import { AxiosResponse } from "axios"
 import { instance } from "common/api"
-import { ResponseType } from "common/types"
+import { BaseResponseType } from "common/types"
 
 export const authAPI = {
   login(data: LoginParamsType) {
     return instance.post<
-      ResponseType<{ userId: number }>,
+      BaseResponseType<{ userId: number }>,
       AxiosResponse<
-        ResponseType<{
+        BaseResponseType<{
           userId: number
         }>
       >,
@@ -15,10 +15,10 @@ export const authAPI = {
     >("/auth/login", data)
   },
   me() {
-    return instance.get<ResponseType<{ id: number; email: string; login: string }>>("/auth/me")
+    return instance.get<BaseResponseType<{ id: number; email: string; login: string }>>("/auth/me")
   },
   logout() {
-    return instance.delete<ResponseType>(`/auth/login`)
+    return instance.delete<BaseResponseType>(`/auth/login`)
   },
 }
 

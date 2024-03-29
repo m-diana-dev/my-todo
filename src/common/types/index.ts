@@ -1,1 +1,1 @@
-export type { ResponseType } from "./responseType"
+export type { BaseResponseType } from "common/types/common.types."
