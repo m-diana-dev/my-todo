@@ -51,9 +51,9 @@ export type TodolistDomainType = TodolistType & {
 
 //TC
 
-const setTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }>(
+const setTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, undefined>(
   `${slice.name}/setTodolists`,
-  async (arg, thunkAPI) => {
+  async (_, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
     dispatch(appActions.setAppStatus({ status: "loading" }))
     try {

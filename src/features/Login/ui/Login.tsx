@@ -1,11 +1,11 @@
 import React from "react"
 import s from "features/Login/ui/Login.module.css"
 import { useFormik } from "formik"
-import { loginTC } from "features/Login/model/auth-reducer"
 import { AppStateType, useAppDispatch } from "app/store"
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { Button, Checkbox, Input } from "common/components"
+import { authThunks } from "features/Login/model/auth-reducer"
 
 export const Login = () => {
   type FormikErrorType = {
@@ -38,7 +38,7 @@ export const Login = () => {
       return errors
     },
     onSubmit: (values) => {
-      dispatch(loginTC(values))
+      dispatch(authThunks.login(values))
       formik.resetForm()
     },
   })
