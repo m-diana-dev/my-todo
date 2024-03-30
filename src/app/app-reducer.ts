@@ -7,6 +7,11 @@ const slice = createSlice({
     error: "",
     isInitialized: false,
   },
+  selectors: {
+    selectAppStatus: (sliceState) => sliceState.status,
+    selectAppError: (sliceState) => sliceState.error,
+    selectIsInitialized: (sliceState) => sliceState.isInitialized,
+  },
   reducers: {
     setAppStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
       state.status = action.payload.status
@@ -29,3 +34,4 @@ export type AppState = ReturnType<typeof slice.getInitialState>
 
 export const appReducer = slice.reducer
 export const appActions = slice.actions
+export const { selectAppStatus, selectAppError, selectIsInitialized } = slice.selectors

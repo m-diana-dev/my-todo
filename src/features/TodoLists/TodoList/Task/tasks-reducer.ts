@@ -16,6 +16,9 @@ import { RESULT_CODE } from "common/enums/enum"
 const slice = createSlice({
   name: "tasks",
   initialState: {} as TasksType,
+  selectors: {
+    selectTasks: (sliceState) => sliceState,
+  },
   reducers: {
     changeTaskEntityStatus: (
       state,
@@ -193,3 +196,4 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = { setTasks, createTask, updateTask, deleteTask }
+export const { selectTasks } = slice.selectors

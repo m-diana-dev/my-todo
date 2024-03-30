@@ -8,6 +8,9 @@ import { RESULT_CODE } from "common/enums"
 const slice = createSlice({
   name: "todolists",
   initialState: [] as TodolistDomainType[],
+  selectors: {
+    selectTodolists: (sliceState) => sliceState,
+  },
   reducers: {
     changeTodoListFilter: (state, action: PayloadAction<{ id: string; filter: FilterType }>) => {
       const index = state.findIndex((todo) => todo.id === action.payload.id)
@@ -131,3 +134,4 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
 export const todoListsReducer = slice.reducer
 export const todoListsActions = slice.actions
 export const todoListThunks = { setTodolists, createTodolist, deleteTodolist, updateTodolist }
+export const { selectTodolists } = slice.selectors

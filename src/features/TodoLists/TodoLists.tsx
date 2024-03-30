@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
 import {
   FilterType,
+  selectTodolists,
   TodolistDomainType,
   todoListsActions,
   todoListThunks,
@@ -10,16 +11,17 @@ import {
 import { TodoList } from "features/TodoLists/TodoList/TodoList"
 import { TaskDomainType } from "features/TodoLists/api/todolistApi"
 import { Navigate } from "react-router-dom"
-import { tasksThunks } from "features/TodoLists/TodoList/Task/tasks-reducer"
+import { selectTasks, tasksThunks } from "features/TodoLists/TodoList/Task/tasks-reducer"
 import { AddItemForm } from "common/components"
+import { selectIsLoggedIn } from "features/Login/model/auth-reducer"
 
 export type TasksType = {
   [id: string]: TaskDomainType[]
 }
 export const TodoLists = () => {
-  const tasks = useSelector<AppStateType, TasksType>((state) => state.tasks)
-  const todoLists = useSelector<AppStateType, TodolistDomainType[]>((state) => state.todolists)
-  const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.auth.isLoggedIn)
+  const tasks = useSelector<AppStateType, TasksType>(selectTasks)
+  const todoLists = useSelector<AppStateType, TodolistDomainType[]>(selectTodolists)
+  const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
 
   const dispatch = useAppDispatch()
 

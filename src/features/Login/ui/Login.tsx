@@ -5,7 +5,7 @@ import { AppStateType, useAppDispatch } from "app/store"
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { Button, Checkbox, Input } from "common/components"
-import { authThunks } from "features/Login/model/auth-reducer"
+import { authThunks, selectIsLoggedIn } from "features/Login/model/auth-reducer"
 import { BaseResponseType } from "common/types"
 
 export const Login = () => {
@@ -16,7 +16,7 @@ export const Login = () => {
   }
 
   const dispatch = useAppDispatch()
-  const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
 
   const formik = useFormik({
     initialValues: {

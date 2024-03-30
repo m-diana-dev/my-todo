@@ -4,7 +4,7 @@ import { Header } from "features/Header/Header"
 import { TodoLists } from "features/TodoLists/TodoLists"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
-import { RequestStatusType } from "app/app-reducer"
+import { RequestStatusType, selectAppStatus, selectIsInitialized } from "app/app-reducer"
 import { Login } from "features/Login/ui/Login"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Error404 } from "features/Error404/Error404"
@@ -12,8 +12,8 @@ import { ErrorModal, Preloader, PreloaderCircle } from "common/components"
 import { authThunks } from "features/Login/model/auth-reducer"
 
 function App() {
-  const appStatus = useSelector<AppStateType, RequestStatusType>((state) => state.app.status)
-  const isInitialized = useSelector<AppStateType, boolean>((state) => state.app.isInitialized)
+  const appStatus = useSelector<AppStateType, RequestStatusType>(selectAppStatus)
+  const isInitialized = useSelector<AppStateType, boolean>(selectIsInitialized)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
