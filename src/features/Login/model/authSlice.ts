@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { appActions } from "app/app-reducer"
+import { appActions } from "app/appSlice"
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError, thunkTryCatch } from "common/utils"
 import { authAPI, LoginParamsType } from "features/Login/api/authApi"
 import { RESULT_CODE } from "common/enums"
@@ -78,7 +78,7 @@ const initializeApp = createAppAsyncThunk<{ isLoggedIn: boolean }, undefined>(
 )
 
 export const authActions = slice.actions
-export const authReducer = slice.reducer
+export const authSlice = slice.reducer
 export const authThunks = { login, logout, initializeApp }
 
 export const { selectIsLoggedIn } = slice.selectors

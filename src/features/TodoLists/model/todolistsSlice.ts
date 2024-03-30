@@ -1,9 +1,14 @@
-import { DeleteTodolistArgs, todolistApi, TodolistType, UpdateTodolistArgs } from "features/TodoLists/api/todolistApi"
-import { appActions, RequestStatusType } from "app/app-reducer"
+import { appActions, RequestStatusType } from "app/appSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { tasksThunks } from "features/TodoLists/TodoList/Task/tasks-reducer"
+import { tasksThunks } from "features/TodoLists/model/tasksSlice"
 import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError, thunkTryCatch } from "common/utils"
 import { RESULT_CODE } from "common/enums"
+import {
+  DeleteTodolistArgs,
+  TodolistType,
+  UpdateTodolistArgs,
+} from "features/TodoLists/api/todolosts/todolistApi.types"
+import { todolistApi } from "features/TodoLists/api/todolosts/todolistApi"
 
 const slice = createSlice({
   name: "todolists",
@@ -131,7 +136,7 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
   },
 )
 
-export const todoListsReducer = slice.reducer
+export const todolistsSlice = slice.reducer
 export const todoListsActions = slice.actions
 export const todoListThunks = { setTodolists, createTodolist, deleteTodolist, updateTodolist }
 export const { selectTodolists } = slice.selectors

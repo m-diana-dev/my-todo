@@ -1,4 +1,4 @@
-import { BtnPropsType, Button } from "common/components/Button/Button"
+import { Props, Button } from "common/components/Button/Button"
 import { Meta, StoryFn } from "@storybook/react"
 import del from "assets/image/delete.svg"
 import add from "assets/image/add.svg"
@@ -17,7 +17,7 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-const Template: StoryFn<BtnPropsType> = (arg: any) => <Button {...arg} />
+const Template: StoryFn<Props> = (arg: any) => <Button {...arg} />
 
 export const FilterButton = Template.bind({})
 FilterButton.args = {

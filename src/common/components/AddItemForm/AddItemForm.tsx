@@ -3,11 +3,11 @@ import add from "assets/image/add.svg"
 import s from "common/components/AddItemForm/AddItemForm.module.css"
 import { Input, Button } from "common/components"
 
-type AddItemFormPropsType = {
+type Props = {
   addTitle: (title: string) => void
   disabled?: boolean
 }
-export const AddItemForm = memo((props: AddItemFormPropsType) => {
+export const AddItemForm = memo(({ addTitle, disabled }: Props) => {
   const [inputTitle, setInputTitle] = useState("")
   const [error, setError] = useState("")
   const OnChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
   }
   const OnAddTitleHandler = () => {
     if (inputTitle.trim() !== "") {
-      props.addTitle(inputTitle.trim())
+      addTitle(inputTitle.trim())
       setInputTitle("")
     } else {
       setError("Error")
@@ -30,7 +30,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
   }
 
   const inputStyle = s.inputWidth
-  const disabledForm = props.disabled ? s.disabled : undefined
+  const disabledForm = disabled ? s.disabled : undefined
   return (
     <div className={s.AddItemForm + " " + disabledForm}>
       <Input

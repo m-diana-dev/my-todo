@@ -3,10 +3,10 @@ import {
   FilterType,
   TodolistDomainType,
   todoListsActions,
-  todoListsReducer,
+  todolistsSlice,
   todoListThunks,
-} from "features/TodoLists/TodoList/todolists-reducer"
-import { TodolistType } from "features/TodoLists/api/todolistApi"
+} from "features/TodoLists/model/todolistsSlice"
+import { TodolistType } from "features/TodoLists/api/todolosts/todolistApi.types"
 
 let todolistId1: string
 let todolistId2: string
@@ -22,9 +22,9 @@ beforeEach(() => {
 })
 test("correct todolist should be removed", () => {
   //выполнения тестируемого кода
-  // const endState = todoListsReducer(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
-  // const endState = todoListsReducer(startState, todoListsActions.deleteTodoList({ id: todolistId1 }))
-  const endState = todoListsReducer(
+  // const endState = todolistsSlice(startState, {type: "DELETE-TODOLIST", idTodoList: todolistId1})
+  // const endState = todolistsSlice(startState, todoListsActions.deleteTodoList({ id: todolistId1 }))
+  const endState = todolistsSlice(
     startState,
     todoListThunks.deleteTodolist.fulfilled({ todolistID: todolistId1 }, "requestId", { todolistID: todolistId1 }),
   )
@@ -42,7 +42,7 @@ test("correct todolist should be added", () => {
     order: 0,
   }
 
-  const endState = todoListsReducer(
+  const endState = todolistsSlice(
     startState,
     todoListThunks.createTodolist.fulfilled({ todolist: newTodolist }, "requestId", newTodolist),
   )
@@ -60,7 +60,7 @@ test("correct todolist should change its name", () => {
     "requestId",
     { todolistID: todolistId2, title: newTodolistTitle },
   )
-  const endState = todoListsReducer(startState, action)
+  const endState = todolistsSlice(startState, action)
 
   expect(endState[0].title).toBe("What to learn")
   expect(endState[1].title).toBe(newTodolistTitle)
@@ -71,14 +71,14 @@ test("correct filter of todolist should be changed", () => {
 
   const action = todoListsActions.changeTodoListFilter({ id: todolistId2, filter: newFilter })
 
-  const endState = todoListsReducer(startState, action)
+  const endState = todolistsSlice(startState, action)
 
   expect(endState[0].filter).toBe("all")
   expect(endState[1].filter).toBe(newFilter)
 })
 
 test("entity status of todolist should be changed", () => {
-  const endState = todoListsReducer(
+  const endState = todolistsSlice(
     startState,
     todoListsActions.changeTodoListStatus({ id: todolistId1, status: "loading" }),
   )

@@ -1,4 +1,4 @@
-import { authActions, authReducer, authThunks } from "features/Login/model/auth-reducer"
+import { authActions, authSlice, authThunks } from "features/Login/model/authSlice"
 
 let startState: { isLoggedIn: boolean }
 beforeEach(() => {
@@ -7,7 +7,7 @@ beforeEach(() => {
   }
 })
 test("correct logged status should be set", () => {
-  const endState: { isLoggedIn: boolean } = authReducer(
+  const endState: { isLoggedIn: boolean } = authSlice(
     startState,
     authThunks.initializeApp.fulfilled({ isLoggedIn: true }, "requestId", undefined),
   )

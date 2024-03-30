@@ -1,15 +1,15 @@
 import React, { useEffect } from "react"
 import "app/App.css"
 import { Header } from "features/Header/Header"
-import { TodoLists } from "features/TodoLists/TodoLists"
+import { TodoLists } from "features/TodoLists/ui/TodoLists"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
-import { RequestStatusType, selectAppStatus, selectIsInitialized } from "app/app-reducer"
+import { RequestStatusType, selectAppStatus, selectIsInitialized } from "app/appSlice"
 import { Login } from "features/Login/ui/Login"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Error404 } from "features/Error404/Error404"
 import { ErrorModal, Preloader, PreloaderCircle } from "common/components"
-import { authThunks } from "features/Login/model/auth-reducer"
+import { authThunks } from "features/Login/model/authSlice"
 
 function App() {
   const appStatus = useSelector<AppStateType, RequestStatusType>(selectAppStatus)

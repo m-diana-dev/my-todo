@@ -1,15 +1,13 @@
 import React, { ComponentProps, memo } from "react"
 import s from "common/components/Button/Button.module.css"
 
-export type BtnPropsType = {
+export type Props = {
   round?: boolean
   active?: boolean
   children?: React.ReactNode
   transparent?: boolean
 } & ComponentProps<"button">
-export const Button: React.FC<BtnPropsType> = memo((props) => {
-  const { round, active, children, transparent, ...restProps } = props
-
+export const Button = memo(({ round, active, children, transparent, ...restProps }: Props) => {
   const buttonStyle =
     s.button + " " + (round ? s.round : "") + (active ? s.activeFilter : "") + (transparent ? s.transparent : "")
   return (

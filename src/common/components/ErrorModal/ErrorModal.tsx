@@ -3,7 +3,7 @@ import s from "common/components/ErrorModal/ErrorModal.module.css"
 import errorImg from "assets/image/error.png"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
-import { appActions } from "app/app-reducer"
+import { appActions } from "app/appSlice"
 import { Button } from "common/components"
 
 export const ErrorModal = memo(() => {
@@ -12,7 +12,7 @@ export const ErrorModal = memo(() => {
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      handleClose()
+      closeModalHandler()
     }, 6000)
 
     return () => {
@@ -20,7 +20,7 @@ export const ErrorModal = memo(() => {
     }
   }, [error])
 
-  const handleClose = () => {
+  const closeModalHandler = () => {
     dispatch(appActions.setAppError({ error: "" }))
   }
 
@@ -32,7 +32,7 @@ export const ErrorModal = memo(() => {
         <span className={s.title}>Error!</span>
       </div>
       <p>{error}</p>
-      <Button onClick={handleClose}>Dismiss</Button>
+      <Button onClick={closeModalHandler}>Dismiss</Button>
     </div>
   )
 })

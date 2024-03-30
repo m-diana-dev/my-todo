@@ -2,22 +2,22 @@ import React, { ChangeEvent, memo, useState } from "react"
 import s from "common/components/EditableSpan/EditableSpan.module.css"
 import { Input } from "common/components"
 
-type EditableSpanPropsType = {
+type Props = {
   title: string
   disabled?: boolean
   onChange: (title: string) => void
 }
-export const EditableSpan = memo((props: EditableSpanPropsType) => {
+export const EditableSpan = memo(({ title, disabled, onChange }: Props) => {
   const [modeInput, setModeInput] = useState(false)
-  const [inputTitle, setInputTitle] = useState(props.title)
+  const [inputTitle, setInputTitle] = useState(title)
   const onDoubleClickHandler = () => {
-    if (!props.disabled) {
+    if (!disabled) {
       setModeInput(true)
     }
   }
   const onBlurHandler = () => {
     setModeInput(false)
-    props.onChange(inputTitle)
+    onChange(inputTitle)
   }
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputTitle(e.currentTarget.value)
@@ -29,7 +29,7 @@ export const EditableSpan = memo((props: EditableSpanPropsType) => {
     <Input style={inputStyle} autoFocus onBlur={onBlurHandler} value={inputTitle} onChange={onChangeHandler} />
   ) : (
     <span className={s.inputWidth} onDoubleClick={onDoubleClickHandler}>
-      {props.title}
+      {title}
     </span>
   )
 })

@@ -1,55 +1,15 @@
 import React from "react"
 import s from "features/Login/ui/Login.module.css"
-import { useFormik } from "formik"
-import { AppStateType, useAppDispatch } from "app/store"
+import { AppStateType } from "app/store"
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { Button, Checkbox, Input } from "common/components"
-import { authThunks, selectIsLoggedIn } from "features/Login/model/auth-reducer"
-import { BaseResponseType } from "common/types"
+import { selectIsLoggedIn } from "features/Login/model/authSlice"
+import { useLogin } from "features/Login/lib/useLogin"
 
 export const Login = () => {
-  type FormikErrorType = {
-    email?: string
-    password?: string
-    rememberMe?: boolean
-  }
-
-  const dispatch = useAppDispatch()
   const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-    validate: (values) => {
-      const errors: FormikErrorType = {}
-      if (!values.email) {
-        errors.email = "Required"
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = "Invalid email address"
-      }
-      if (!values.password) {
-        errors.password = "Required"
-      } else if (values.password.length < 4) {
-        errors.password = "Invalid password"
-      }
-      return errors
-    },
-    onSubmit: (values, formikHelpers) => {
-      dispatch(authThunks.login(values))
-        .unwrap()
-        .catch((e: BaseResponseType) => {
-          e.fieldsErrors?.forEach((el) => {
-            formikHelpers.setFieldError(el.field, el.error)
-          })
-        })
-      // formik.resetForm()
-    },
-  })
-
+  const { formik } = useLogin()
   if (isLoggedIn) {
     return <Navigate to={"/"} />
   }

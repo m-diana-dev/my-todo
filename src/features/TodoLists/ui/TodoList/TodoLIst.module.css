@@ -8,25 +8,6 @@
   margin-left: 30px;
   margin-bottom: 30px;
 }
-.todoListList {
-  padding: 20px 0;
-  flex: 1 1 auto;
-}
-.todoListBtns {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: center;
-}
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-transform: uppercase;
-}
-.title input {
-  width: calc(100% - 50px);
-}
 
 @media (max-width: 1200px) {
   .todoListItem {

@@ -3,7 +3,7 @@ import s from "features/Header/Header.module.css"
 import { AppStateType, useAppDispatch } from "app/store"
 import { useSelector } from "react-redux"
 import { Button } from "common/components"
-import { authThunks } from "features/Login/model/auth-reducer"
+import { authThunks } from "features/Login/model/authSlice"
 export const Header = memo(() => {
   console.log("Header rendered")
   const dispatch = useAppDispatch()

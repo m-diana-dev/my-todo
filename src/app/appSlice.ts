@@ -32,6 +32,6 @@ const slice = createSlice({
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed"
 export type AppState = ReturnType<typeof slice.getInitialState>
 
-export const appReducer = slice.reducer
+export const appSlice = slice.reducer
 export const appActions = slice.actions
 export const { selectAppStatus, selectAppError, selectIsInitialized } = slice.selectors
