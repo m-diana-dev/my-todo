@@ -10,7 +10,7 @@ import { TasksType } from "features/TodoLists/TodoLists"
 import { appActions, RequestStatusType } from "app/app-reducer"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { todoListThunks } from "features/TodoLists/TodoList/todolists-reducer"
-import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError } from "common/utils"
+import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError, thunkTryCatch } from "common/utils"
 import { RESULT_CODE } from "common/enums/enum"
 
 const slice = createSlice({
@@ -71,17 +71,10 @@ const slice = createSlice({
 const setTasks = createAppAsyncThunk<{ todolistID: string; tasks: TaskType[] }, string>(
   `${slice.name}/setTasks`,
   async (todolistID, thunkAPI) => {
-    const { dispatch, rejectWithValue } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
-    try {
+    return thunkTryCatch(thunkAPI, async () => {
       const res = await todolistApi.getTasks(todolistID)
-      dispatch(appActions.setAppStatus({ status: "succeeded" }))
       return { todolistID, tasks: res.data.items }
-    } catch (e) {
-      handleServerNetworkError(e, dispatch)
-      dispatch(appActions.setAppStatus({ status: "succeeded" }))
-      return rejectWithValue(null)
-    }
+    })
   },
 )
 
@@ -89,22 +82,15 @@ const createTask = createAppAsyncThunk<{ task: TaskType }, CreateTaskArgs>(
   `${slice.name}/createTask`,
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
-    try {
+    return thunkTryCatch(thunkAPI, async () => {
       const res = await todolistApi.createTask(arg)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
         return { task: res.data.data.item }
       } else {
         handleServerAppError(res.data, dispatch)
-        dispatch(appActions.setAppStatus({ status: "failed" }))
         return rejectWithValue(null)
       }
-    } catch (e) {
-      handleServerNetworkError(e, dispatch)
-      dispatch(appActions.setAppStatus({ status: "failed" }))
-      return rejectWithValue(null)
-    }
+    })
   },
 )
 
@@ -124,7 +110,6 @@ const deleteTask = createAppAsyncThunk<DeleteTaskArgs, DeleteTaskArgs>(
         return arg
       } else {
         handleServerAppError(res.data, dispatch)
-        dispatch(appActions.setAppStatus({ status: "failed" }))
         dispatch(
           tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "failed" }),
         )
@@ -132,7 +117,6 @@ const deleteTask = createAppAsyncThunk<DeleteTaskArgs, DeleteTaskArgs>(
       }
     } catch (e) {
       handleServerNetworkError(e, dispatch)
-      dispatch(appActions.setAppStatus({ status: "failed" }))
       dispatch(
         tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "failed" }),
       )
@@ -184,7 +168,6 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
         return arg
       } else {
         handleServerAppError(res.data, dispatch)
-        dispatch(appActions.setAppStatus({ status: "failed" }))
         dispatch(
           tasksActions.changeTaskEntityStatus({
             todolistID: arg.todolistID,
@@ -195,7 +178,6 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
         return rejectWithValue(null)
       }
     } catch (e) {
-      dispatch(appActions.setAppStatus({ status: "failed" }))
       dispatch(
         tasksActions.changeTaskEntityStatus({
           todolistID: arg.todolistID,

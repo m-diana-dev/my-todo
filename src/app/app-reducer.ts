@@ -1,8 +1,4 @@
-import { Dispatch } from "redux"
-import { authActions } from "features/Login/model/auth-reducer"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { authAPI } from "features/Login/api/authApi"
-import { createAppAsyncThunk } from "common/utils"
 
 const slice = createSlice({
   name: "app",
