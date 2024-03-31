@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, UnknownAction } from "@reduxjs/toolkit"
+import { createSlice, isFulfilled, isPending, isRejected, PayloadAction, UnknownAction } from "@reduxjs/toolkit"
 
 const slice = createSlice({
   name: "app",
@@ -28,30 +28,15 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        (action: UnknownAction) => {
-          return action.type.endsWith("/pending")
-        },
-        (state, action) => {
-          state.status = "loading"
-        },
-      )
-      .addMatcher(
-        (action: UnknownAction) => {
-          return action.type.endsWith("/rejected")
-        },
-        (state, action) => {
-          state.status = "failed"
-        },
-      )
-      .addMatcher(
-        (action: UnknownAction) => {
-          return action.type.endsWith("/fulfilled")
-        },
-        (state, action) => {
-          state.status = "succeeded"
-        },
-      )
+      .addMatcher(isPending, (state, action) => {
+        state.status = "loading"
+      })
+      .addMatcher(isRejected, (state, action) => {
+        state.status = "failed"
+      })
+      .addMatcher(isFulfilled, (state, action) => {
+        state.status = "succeeded"
+      })
   },
 })
 
