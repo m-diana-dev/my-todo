@@ -101,12 +101,10 @@ const deleteTask = createAppAsyncThunk<DeleteTaskArgs, DeleteTaskArgs>(
   `${slice.name}/deleteTask`,
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
     dispatch(tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "loading" }))
     try {
       const res = await tasksApi.deleteTask(arg)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
         dispatch(
           tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "succeeded" }),
         )
@@ -141,7 +139,6 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
   `${slice.name}/updateTask`,
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue, getState } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
     dispatch(tasksActions.changeTaskEntityStatus({ todolistID: arg.todolistID, taskID: arg.taskID, status: "loading" }))
     try {
       const task = getState().tasks[arg.todolistID].find((el) => el.id === arg.taskID)
@@ -160,7 +157,6 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgs, UpdateTaskArgs>(
       }
       const res = await tasksApi.updateTask(arg.todolistID, arg.taskID, modelAPI)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
         dispatch(
           tasksActions.changeTaskEntityStatus({
             todolistID: arg.todolistID,

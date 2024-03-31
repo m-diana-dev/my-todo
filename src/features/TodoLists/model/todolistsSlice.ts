@@ -91,12 +91,10 @@ const deleteTodolist = createAppAsyncThunk<DeleteTodolistArgs, DeleteTodolistArg
   `${slice.name}/deleteTodolist`,
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
     dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "loading" }))
     try {
       const res = await todolistApi.deleteTodolist(arg)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
         dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "succeeded" }))
         return { todolistID: arg.todolistID }
       } else {
@@ -115,12 +113,10 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
   `${slice.name}/updateTodolist`,
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
-    dispatch(appActions.setAppStatus({ status: "loading" }))
     dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "loading" }))
     try {
       const res = await todolistApi.updateTodolist(arg)
       if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(appActions.setAppStatus({ status: "succeeded" }))
         dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "succeeded" }))
         return arg
       } else {
