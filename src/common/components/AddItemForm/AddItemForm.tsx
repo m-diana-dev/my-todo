@@ -2,9 +2,10 @@ import React, { ChangeEvent, KeyboardEvent, memo, useState } from "react"
 import add from "assets/image/add.svg"
 import s from "common/components/AddItemForm/AddItemForm.module.css"
 import { Input, Button } from "common/components"
+import { BaseResponseType } from "common/types"
 
 type Props = {
-  addTitle: (title: string) => void
+  addTitle: (title: string) => Promise<unknown>
   disabled?: boolean
 }
 export const AddItemForm = memo(({ addTitle, disabled }: Props) => {
@@ -23,7 +24,12 @@ export const AddItemForm = memo(({ addTitle, disabled }: Props) => {
   const OnAddTitleHandler = () => {
     if (inputTitle.trim() !== "") {
       addTitle(inputTitle.trim())
-      setInputTitle("")
+        .then(() => {
+          setInputTitle("")
+        })
+        .catch((e: BaseResponseType) => {
+          setError(e.messages[0])
+        })
     } else {
       setError("Error")
     }

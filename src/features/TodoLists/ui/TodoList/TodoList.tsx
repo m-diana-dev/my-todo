@@ -22,17 +22,11 @@ type Props = {
 export const TodoList = memo(({ id, title, tasks, filter, status }: Props) => {
   const dispatch = useAppDispatch()
 
-  const addTask = useCallback(
-    (todolistID: string, title: string) => {
-      dispatch(tasksThunks.createTask({ todolistID, title }))
-    },
-    [dispatch],
-  )
   const addTaskCb = useCallback(
     (title: string) => {
-      addTask(id, title)
+      return dispatch(tasksThunks.createTask({ todolistID: id, title })).unwrap()
     },
-    [addTask, id],
+    [dispatch, id],
   )
 
   return (
