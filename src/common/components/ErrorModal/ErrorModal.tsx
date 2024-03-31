@@ -3,11 +3,11 @@ import s from "common/components/ErrorModal/ErrorModal.module.css"
 import errorImg from "assets/image/error.png"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
-import { appActions } from "app/appSlice"
+import { appActions, selectAppError } from "app/appSlice"
 import { Button } from "common/components"
 
 export const ErrorModal = memo(() => {
-  const error = useSelector<AppStateType, string>((state) => state.app.error)
+  const error = useSelector<AppStateType, string>(selectAppError)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const ErrorModal = memo(() => {
   return (
     <div className={s.modal + " " + modalOpen}>
       <div className={s.modalTop}>
-        <img src={errorImg} />
+        <img src={errorImg} alt="errorIcon" />
         <span className={s.title}>Error!</span>
       </div>
       <p>{error}</p>

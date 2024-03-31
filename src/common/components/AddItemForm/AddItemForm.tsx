@@ -11,17 +11,17 @@ type Props = {
 export const AddItemForm = memo(({ addTitle, disabled }: Props) => {
   const [inputTitle, setInputTitle] = useState("")
   const [error, setError] = useState("")
-  const OnChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setInputTitle(e.currentTarget.value)
     setError("")
   }
 
-  const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const addTitleKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      OnAddTitleHandler()
+      addTitleHandler()
     }
   }
-  const OnAddTitleHandler = () => {
+  const addTitleHandler = () => {
     if (inputTitle.trim() !== "") {
       addTitle(inputTitle.trim())
         .then(() => {
@@ -42,12 +42,12 @@ export const AddItemForm = memo(({ addTitle, disabled }: Props) => {
       <Input
         style={inputStyle}
         type="text"
-        onChange={OnChangeInputHandler}
-        onKeyDown={onKeyDownHandler}
+        onChange={changeInputHandler}
+        onKeyDown={addTitleKeyDownHandler}
         value={inputTitle}
         error={!!error}
       />
-      <Button onClick={OnAddTitleHandler} round={true}>
+      <Button onClick={addTitleHandler} round={true}>
         <img src={add} alt="icon" />
       </Button>
       {error && <div className="errorMessage">{error}</div>}
