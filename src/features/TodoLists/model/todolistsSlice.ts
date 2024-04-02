@@ -1,7 +1,7 @@
 import { appActions, RequestStatusType } from "app/appSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { tasksThunks } from "features/TodoLists/model/tasksSlice"
-import { createAppAsyncThunk, handleServerAppError, handleServerNetworkError, thunkTryCatch } from "common/utils"
+import { createAppAsyncThunk } from "common/utils"
 import { RESULT_CODE } from "common/enums"
 import {
   DeleteTodolistArgs,
@@ -101,20 +101,13 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI
     dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "loading" }))
-    try {
-      const res = await todolistApi.updateTodolist(arg)
-      if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
-        dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "succeeded" }))
-        return arg
-      } else {
-        handleServerAppError(res.data, dispatch)
-        dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
-        return rejectWithValue(null)
-      }
-    } catch (e) {
-      handleServerNetworkError(e, dispatch)
-      dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "failed" }))
-      return rejectWithValue(null)
+    const res = await todolistApi.updateTodolist(arg).finally(() => {
+      dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "idle" }))
+    })
+    if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
+      return arg
+    } else {
+      return rejectWithValue(res.data)
     }
   },
 )
