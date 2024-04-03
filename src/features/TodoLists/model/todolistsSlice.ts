@@ -2,7 +2,7 @@ import { appActions, RequestStatusType } from "app/appSlice"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { tasksThunks } from "features/TodoLists/model/tasksSlice"
 import { createAppAsyncThunk } from "common/utils"
-import { RESULT_CODE } from "common/enums"
+import { ResultCode } from "common/enums"
 import {
   DeleteTodolistArgs,
   TodolistType,
@@ -74,7 +74,7 @@ const createTodolist = createAppAsyncThunk<{ todolist: TodolistType }, { title: 
   `${slice.name}/createTodolist`,
   async (arg, { rejectWithValue }) => {
     const res = await todolistApi.createTodolist(arg.title)
-    if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
+    if (res.data.resultCode === ResultCode.Succeeded) {
       return { todolist: res.data.data.item }
     } else {
       return rejectWithValue(res.data)
@@ -89,7 +89,7 @@ const deleteTodolist = createAppAsyncThunk<DeleteTodolistArgs, DeleteTodolistArg
     const res = await todolistApi.deleteTodolist(arg).finally(() => {
       dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "idle" }))
     })
-    if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
+    if (res.data.resultCode === ResultCode.Succeeded) {
       return { todolistID: arg.todolistID }
     } else {
       return rejectWithValue(res.data)
@@ -104,7 +104,7 @@ const updateTodolist = createAppAsyncThunk<UpdateTodolistArgs, UpdateTodolistArg
     const res = await todolistApi.updateTodolist(arg).finally(() => {
       dispatch(todoListsActions.changeTodoListStatus({ id: arg.todolistID, status: "idle" }))
     })
-    if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
+    if (res.data.resultCode === ResultCode.Succeeded) {
       return arg
     } else {
       return rejectWithValue(res.data)

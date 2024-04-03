@@ -2,7 +2,7 @@ import { createSlice, isFulfilled, PayloadAction } from "@reduxjs/toolkit"
 import { appActions } from "app/appSlice"
 import { createAppAsyncThunk } from "common/utils"
 import { authAPI, LoginParamsType } from "features/Login/api/authApi"
-import { RESULT_CODE } from "common/enums"
+import { ResultCode } from "common/enums"
 
 const slice = createSlice({
   name: "auth",
@@ -30,7 +30,7 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
   `${slice.name}/login`,
   async (arg, { rejectWithValue }) => {
     const res = await authAPI.login(arg)
-    if (res.data.resultCode === RESULT_CODE.SUCCEEDED) {
+    if (res.data.resultCode === ResultCode.Succeeded) {
       return { isLoggedIn: true }
     } else {
       return rejectWithValue(res.data)

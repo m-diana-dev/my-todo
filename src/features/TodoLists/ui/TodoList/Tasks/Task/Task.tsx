@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, useCallback } from "react"
 import s from "features/TodoLists/ui/TodoList/Tasks/Task/Task.module.css"
-import del from "assets/image/delete.svg"
+import del from "assets/images/delete.svg"
 import { tasksThunks } from "features/TodoLists/model/tasksSlice"
 import { useAppDispatch } from "app/store"
 import { RequestStatusType } from "app/appSlice"

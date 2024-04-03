@@ -3,13 +3,13 @@ import s from "features/Header/Header.module.css"
 import { AppStateType, useAppDispatch } from "app/store"
 import { useSelector } from "react-redux"
 import { Button } from "common/components"
-import { authThunks } from "features/Login/model/authSlice"
+import { authThunks, selectIsLoggedIn } from "features/Login/model/authSlice"
 export const Header = memo(() => {
   console.log("Header rendered")
   const dispatch = useAppDispatch()
-  const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
 
-  const onClickHandler = () => {
+  const logoutHandler = () => {
     dispatch(authThunks.logout())
   }
   return (
@@ -20,7 +20,7 @@ export const Header = memo(() => {
             <span>📄</span>TodoList
           </h1>
           {isLoggedIn && (
-            <Button onClick={onClickHandler} transparent={true}>
+            <Button onClick={logoutHandler} transparent={true}>
               LogOut
             </Button>
           )}

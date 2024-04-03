@@ -1,5 +1,5 @@
 import React, { ChangeEvent, KeyboardEvent, memo, useState } from "react"
-import add from "assets/image/add.svg"
+import add from "assets/images/add.svg"
 import s from "common/components/AddItemForm/AddItemForm.module.css"
 import { Input, Button } from "common/components"
 import { BaseResponseType } from "common/types"

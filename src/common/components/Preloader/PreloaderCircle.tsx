@@ -1,5 +1,5 @@
 import React from "react"
-import preloader from "assets/image/loading.svg"
+import preloader from "assets/images/loading.svg"
 import s from "common/components/Preloader/PreloaderCircle.module.css"
 
 export const PreloaderCircle = () => {

@@ -1,6 +1,6 @@
 import s from "./TodolistTitle.module.css"
 import { Button, EditableSpan } from "common/components"
-import del from "assets/image/delete.svg"
+import del from "assets/images/delete.svg"
 import React, { useCallback } from "react"
 import { todoListThunks } from "features/TodoLists/model/todolistsSlice"
 import { useAppDispatch } from "app/store"

@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from "react"
 import s from "common/components/ErrorModal/ErrorModal.module.css"
-import errorImg from "assets/image/error.png"
+import errorImg from "assets/images/error.png"
 import { useSelector } from "react-redux"
 import { AppStateType, useAppDispatch } from "app/store"
 import { appActions, selectAppError } from "app/appSlice"

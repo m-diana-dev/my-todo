@@ -1,7 +1,7 @@
 import { Props, Button } from "common/components/Button/Button"
 import { Meta, StoryFn } from "@storybook/react"
-import del from "assets/image/delete.svg"
-import add from "assets/image/add.svg"
+import del from "assets/images/delete.svg"
+import add from "assets/images/add.svg"
 import React from "react"
 
 const meta: Meta<typeof Button> = {

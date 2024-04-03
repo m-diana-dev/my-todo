@@ -50,13 +50,13 @@ const slice = createSlice({
         }
       })
       .addMatcher(isFulfilled, (state, action) => {
-        state.status = "succeeded"
+        state.status = "Succeeded"
       })
   },
 })
 
 //TYPES
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed"
+export type RequestStatusType = "idle" | "loading" | "Succeeded" | "failed"
 export type AppState = ReturnType<typeof slice.getInitialState>
 
 export const appSlice = slice.reducer
