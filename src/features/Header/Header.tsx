@@ -5,7 +5,6 @@ import { useSelector } from "react-redux"
 import { Button } from "common/components"
 import { authThunks, selectIsLoggedIn } from "features/Login/model/authSlice"
 export const Header = memo(() => {
-  console.log("Header rendered")
   const dispatch = useAppDispatch()
   const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
 

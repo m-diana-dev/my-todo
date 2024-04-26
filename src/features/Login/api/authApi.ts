@@ -20,10 +20,14 @@ export const authAPI = {
   logout() {
     return instance.delete<BaseResponseType>(`/auth/login`)
   },
+  getCaptcha() {
+    return instance.get<BaseResponseType>(`/security/get-captcha-url`)
+  },
 }
 
 export type LoginParamsType = {
   email: string
   password: string
   rememberMe: boolean
+  captcha?: string
 }

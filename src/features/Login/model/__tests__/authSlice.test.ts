@@ -1,4 +1,4 @@
-import { authActions, authSlice, authThunks } from "features/Login/model/authSlice"
+import { authSlice, authThunks } from "features/Login/model/authSlice"
 
 let startState: { isLoggedIn: boolean }
 beforeEach(() => {

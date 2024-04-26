@@ -28,10 +28,13 @@ const slice = createSlice({
 
 const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
   `${slice.name}/login`,
-  async (arg, { rejectWithValue }) => {
+  async (arg, { rejectWithValue, dispatch }) => {
     const res = await authAPI.login(arg)
     if (res.data.resultCode === ResultCode.Succeeded) {
       return { isLoggedIn: true }
+    } else if (res.data.resultCode === ResultCode.Captcha) {
+      dispatch(getCaptcha())
+      return rejectWithValue(res.data)
     } else {
       return rejectWithValue(res.data)
     }
@@ -40,7 +43,7 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
 const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, undefined>(`${slice.name}/logout`, async (_, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI
   const res = await authAPI.logout()
-  if (res.data.resultCode === 0) {
+  if (res.data.resultCode === ResultCode.Succeeded) {
     dispatch(appActions.clearData())
     return { isLoggedIn: false }
   } else {
@@ -54,11 +57,20 @@ const initializeApp = createAppAsyncThunk<{ isLoggedIn: boolean }, undefined>(
     const res = await authAPI.me().finally(() => {
       dispatch(appActions.setAppInitialized({ initialized: true }))
     })
-    if (res.data.resultCode === 0) {
+    if (res.data.resultCode === ResultCode.Succeeded) {
       return { isLoggedIn: true }
     } else {
       return rejectWithValue(res.data)
     }
+  },
+)
+
+const getCaptcha = createAppAsyncThunk<{ isLoggedIn: boolean }, undefined>(
+  `${slice.name}/getCaptcha`,
+  async (_, { dispatch, rejectWithValue }) => {
+    const res = await authAPI.getCaptcha()
+    dispatch(appActions.setCaptcha(res))
+    return { isLoggedIn: false }
   },
 )
 

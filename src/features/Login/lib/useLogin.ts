@@ -8,6 +8,7 @@ export const useLogin = () => {
     email?: string
     password?: string
     rememberMe?: boolean
+    captcha?: string
   }
 
   const dispatch = useAppDispatch()
@@ -17,6 +18,7 @@ export const useLogin = () => {
       email: "",
       password: "",
       rememberMe: false,
+      captcha: "",
     },
     validate: (values) => {
       const errors: FormikErrorType = {}

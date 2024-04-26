@@ -6,9 +6,12 @@ import { Navigate } from "react-router-dom"
 import { Button, Checkbox, Input } from "common/components"
 import { selectIsLoggedIn } from "features/Login/model/authSlice"
 import { useLogin } from "features/Login/lib/useLogin"
+import { selectCaptcha } from "app/appSlice"
 
 export const Login = () => {
   const isLoggedIn = useSelector<AppStateType, boolean>(selectIsLoggedIn)
+  const captcha = useSelector<AppStateType, string>(selectCaptcha)
+
   const { formik } = useLogin()
   if (isLoggedIn) {
     return <Navigate to={"/"} />
@@ -36,6 +39,11 @@ export const Login = () => {
             <div className={s.formError}>{formik.errors.password}</div>
           ) : null}
           <Checkbox label={"Remember me"} checked={formik.values.rememberMe} {...formik.getFieldProps("rememberMe")} />
+          {captcha && <img className={s.captcha} src={captcha} alt="captcha" />}
+          {captcha && <Input placeholder={"Captcha"} {...formik.getFieldProps("captcha")} />}
+          {formik.touched.captcha && formik.errors.captcha ? (
+            <div className={s.formError}>{formik.errors.captcha}</div>
+          ) : null}
           <Button type={"submit"} disabled={!formik.isValid}>
             Login
           </Button>

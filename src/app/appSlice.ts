@@ -9,11 +9,13 @@ const slice = createSlice({
     status: "idle" as RequestStatusType,
     error: "",
     isInitialized: false,
+    captcha: "",
   },
   selectors: {
     selectAppStatus: (sliceState) => sliceState.status,
     selectAppError: (sliceState) => sliceState.error,
     selectIsInitialized: (sliceState) => sliceState.isInitialized,
+    selectCaptcha: (sliceState) => sliceState.captcha,
   },
   reducers: {
     setAppStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
@@ -27,6 +29,9 @@ const slice = createSlice({
     },
     clearData: (state) => {
       state.error = ""
+    },
+    setCaptcha: (state, action) => {
+      state.captcha = action.payload.data.url
     },
   },
   extraReducers: (builder) => {
@@ -61,4 +66,4 @@ export type AppState = ReturnType<typeof slice.getInitialState>
 
 export const appSlice = slice.reducer
 export const appActions = slice.actions
-export const { selectAppStatus, selectAppError, selectIsInitialized } = slice.selectors
+export const { selectAppStatus, selectAppError, selectIsInitialized, selectCaptcha } = slice.selectors
